@@ -24,11 +24,9 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Config::INI::Reader::Ordered" => 0,
     "Data::Dumper" => 0,
-    "Devel::LexAlias" => 0,
     "Eval::Closure" => 0,
     "File::HomeDir" => 0,
     "File::Spec" => 0,
-    "Lexical::Persistence" => 0,
     "Module::Runtime" => 0,
     "PadWalker" => 0,
     "Scalar::Util" => 0,
@@ -44,7 +42,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.02",
+  "VERSION" => "0.03",
   "test" => {
     "TESTS" => "t/*.t"
   }
