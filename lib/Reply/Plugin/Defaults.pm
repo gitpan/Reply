@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.01';
+  $Reply::Plugin::Defaults::VERSION = '0.02';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -75,29 +75,3 @@ sub print_result {
 }
 
 1;
-
-__END__
-
-=pod
-
-=head1 NAME
-
-Reply::Plugin::Defaults
-
-=head1 VERSION
-
-version 0.01
-
-=head1 AUTHOR
-
-Jesse Luehrs <doy at cpan dot org>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is Copyright (c) 2013 by Jesse Luehrs.
-
-This is free software, licensed under:
-
-  The MIT (X11) License
-
-=cut

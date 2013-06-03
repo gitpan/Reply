@@ -78,12 +78,17 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.01",
+   "version" : "0.02",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
       },
       "plugins" : [
+         {
+            "class" : "Dist::Zilla::Plugin::FileFinder::Filter",
+            "name" : "WeaverFiles",
+            "version" : "4.300034"
+         },
          {
             "class" : "Dist::Zilla::Plugin::Prereqs",
             "config" : {

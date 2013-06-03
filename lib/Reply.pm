@@ -3,7 +3,7 @@ BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::VERSION = '0.01';
+  $Reply::VERSION = '0.02';
 }
 use strict;
 use warnings;
@@ -26,7 +26,7 @@ sub new {
         _default_plugin => Reply::Plugin::Defaults->new,
     }, $class;
 
-    $self->load_plugin($_) for @{ $opts{plugins} || [] };
+    $self->_load_plugin($_) for @{ $opts{plugins} || [] };
 
     if (defined $opts{config}) {
         print "Loading configuration from $opts{config}... ";
@@ -35,22 +35,6 @@ sub new {
     }
 
     return $self;
-}
-
-
-sub load_plugin {
-    my $self = shift;
-    my ($plugin, $opts) = @_;
-
-    if (!blessed($plugin)) {
-        $plugin = compose_module_name("Reply::Plugin", $plugin);
-        use_package_optimistically($plugin);
-        die "$plugin is not a valid plugin"
-            unless $plugin->isa("Reply::Plugin");
-        $plugin = $plugin->new(%$opts);
-    }
-
-    push @{ $self->{plugins} }, $plugin;
 }
 
 
@@ -83,7 +67,7 @@ sub _load_config {
             $root_config = $data;
         }
         else {
-            $self->load_plugin($name => $data);
+            $self->_load_plugin($name => $data);
         }
     }
 
@@ -99,6 +83,21 @@ sub _load_config {
         };
         $self->_eval($contents);
     }
+}
+
+sub _load_plugin {
+    my $self = shift;
+    my ($plugin, $opts) = @_;
+
+    if (!blessed($plugin)) {
+        $plugin = compose_module_name("Reply::Plugin", $plugin);
+        use_package_optimistically($plugin);
+        die "$plugin is not a valid plugin"
+            unless $plugin->isa("Reply::Plugin");
+        $plugin = $plugin->new(%$opts);
+    }
+
+    push @{ $self->{plugins} }, $plugin;
 }
 
 sub _plugins {
@@ -199,7 +198,7 @@ Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -235,12 +234,6 @@ An arrayref of additional plugins to load.
 
 =back
 
-=head2 load_plugin($plugin, $opts)
-
-Loads the specified plugin. C<$plugin> corresponds to the class
-C<Reply::Plugin::$plugin>, which will be loaded and instantiated. If C<$opts>
-is given, it should be a hashref of options to pass to the plugin constructor.
-
 =head2 run
 
 Runs the repl. Will continue looping until the C<read_line> callback returns
@@ -266,7 +259,7 @@ headers.
 This contains a filename whose contents will be evaluated as perl code once the
 configuration is done being loaded.
 
-=item script_lineI<n>
+=item script_line<I<n>>
 
 Any options that start with C<script_line> will be sorted by their key and then
 each value will be evaluated individually once the configuration is done being

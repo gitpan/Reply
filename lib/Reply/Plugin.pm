@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::VERSION = '0.01';
+  $Reply::Plugin::VERSION = '0.02';
 }
 use strict;
 use warnings;
@@ -25,7 +25,7 @@ Reply::Plugin - base class for Reply plugins
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -85,10 +85,10 @@ single line from the user.
 
 =item command_C<$name> (chained)
 
-If the line read from the user is of the form "#foo args...", then plugins will
-be searched for a callback method named C<command_foo>. This callback takes a
-single string containing the provided arguments, and returns a new line to
-evaluate instead, if any.
+If the line read from the user is of the form C<"#foo args...">, then plugins
+will be searched for a callback method named C<command_foo>. This callback
+takes a single string containing the provided arguments, and returns a new line
+to evaluate instead, if any.
 
 =item mangle_line (chained)
 
