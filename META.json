@@ -15,7 +15,7 @@
    "name" : "Reply",
    "no_index" : {
       "package" : [
-         "Reply::Plugin::Default"
+         "Reply::Plugin::Defaults"
       ]
    },
    "prereqs" : {
@@ -78,7 +78,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.04",
+   "version" : "0.05",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"

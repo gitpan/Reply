@@ -17,7 +17,7 @@ meta-spec:
 name: Reply
 no_index:
   package:
-    - Reply::Plugin::Default
+    - Reply::Plugin::Defaults
 recommends:
   App::Nopaste: 0
   Data::Dump: 0
@@ -44,7 +44,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Reply
   homepage: http://metacpan.org/release/Reply
   repository: git://github.com/doy/reply.git
-version: 0.04
+version: 0.05
 x_Dist_Zilla:
   perl:
     version: 5.018000

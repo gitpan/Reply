@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ReadLine::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ReadLine::VERSION = '0.04';
+  $Reply::Plugin::ReadLine::VERSION = '0.05';
 }
 use strict;
 use warnings;
@@ -81,7 +81,7 @@ Reply::Plugin::ReadLine - use Term::ReadLine for user input
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

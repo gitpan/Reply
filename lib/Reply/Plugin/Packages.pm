@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Packages::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Packages::VERSION = '0.04';
+  $Reply::Plugin::Packages::VERSION = '0.05';
 }
 use strict;
 use warnings;
@@ -65,7 +65,7 @@ Reply::Plugin::Packages - persist the current package between lines
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
