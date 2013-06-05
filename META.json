@@ -35,6 +35,7 @@
          "recommends" : {
             "App::Nopaste" : "0",
             "Data::Dump" : "0",
+            "Data::Printer" : "0",
             "Proc::InvokeEditor" : "0",
             "Term::ReadLine::Gnu" : "0"
          },
@@ -44,6 +45,7 @@
             "Eval::Closure" : "0",
             "File::HomeDir" : "0",
             "File::Spec" : "0",
+            "Getopt::Long" : "0",
             "Module::Runtime" : "0",
             "PadWalker" : "0",
             "Scalar::Util" : "0",
@@ -76,7 +78,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -259,6 +261,11 @@
             "version" : "4.300034"
          },
          {
+            "class" : "Dist::Zilla::Plugin::ContributorsFromGit",
+            "name" : "ContributorsFromGit",
+            "version" : "0.006"
+         },
+         {
             "class" : "Dist::Zilla::Plugin::MetaNoIndex",
             "name" : "MetaNoIndex",
             "version" : "4.300034"
@@ -318,6 +325,10 @@
          "version" : "4.300034"
       }
    },
-   "x_authority" : "cpan:DOY"
+   "x_authority" : "cpan:DOY",
+   "x_contributors" : [
+      "Jesse Luehrs <doy@tozt.net>",
+      "Stanislaw Pusep <creaktive@gmail.com>"
+   ]
 }
 

@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Hints::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Hints::VERSION = '0.03';
+  $Reply::Plugin::Hints::VERSION = '0.04';
 }
 
 my $default_hints;
@@ -86,7 +86,7 @@ Reply::Plugin::Hints - persists lexical hints across input lines
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

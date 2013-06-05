@@ -12,6 +12,7 @@ lib/Reply/Plugin.pm
 lib/Reply/Plugin/Colors.pm
 lib/Reply/Plugin/DataDump.pm
 lib/Reply/Plugin/DataDumper.pm
+lib/Reply/Plugin/DataPrinter.pm
 lib/Reply/Plugin/Defaults.pm
 lib/Reply/Plugin/Editor.pm
 lib/Reply/Plugin/FancyPrompt.pm
