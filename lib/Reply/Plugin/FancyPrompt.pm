@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::FancyPrompt::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::FancyPrompt::VERSION = '0.06';
+  $Reply::Plugin::FancyPrompt::VERSION = '0.07';
 }
 use strict;
 use warnings;
@@ -16,18 +16,23 @@ sub new {
     my $class = shift;
     my $self = $class->SUPER::new(@_);
     $self->{counter} = 0;
+    $self->{prompted} = 0;
     return $self;
 }
 
 sub prompt {
     my $self = shift;
     my ($next) = @_;
+    $self->{prompted} = 1;
     return $self->{counter} . $next->();
 }
 
 sub loop {
     my $self = shift;
-    $self->{counter}++;
+    my ($continue) = @_;
+    $self->{counter}++ if $self->{prompted};
+    $self->{prompted} = 0;
+    $continue;
 }
 
 1;
@@ -42,7 +47,7 @@ Reply::Plugin::FancyPrompt - provides a more informative prompt
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 

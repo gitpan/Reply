@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.06';
+  $Reply::Plugin::Defaults::VERSION = '0.07';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -43,6 +43,15 @@ PREFIX
 sub compile {
     my $self = shift;
     my ($next, $line, %args) = @_;
+
+    my @envs = (
+        ($args{environment} ? ($args{environment}) : ()),
+        values %{ $args{environments} },
+    );
+
+    if (@envs) {
+        $args{environment} = { map { %$_ } @envs }
+    }
 
     return eval_closure(
         source      => "sub {\n$PREFIX;\n$line\n}",

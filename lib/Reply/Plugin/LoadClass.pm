@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::LoadClass::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::LoadClass::VERSION = '0.06';
+  $Reply::Plugin::LoadClass::VERSION = '0.07';
 }
 use strict;
 use warnings;
@@ -45,7 +45,7 @@ Reply::Plugin::LoadClass - attempts to load classes implicitly if possible
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 

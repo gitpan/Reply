@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::VERSION = '0.06';
+  $Reply::Plugin::VERSION = '0.07';
 }
 use strict;
 use warnings;
@@ -25,7 +25,7 @@ Reply::Plugin - base class for Reply plugins
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
@@ -136,8 +136,9 @@ implementation just uses C<print> to print them to the screen.
 
 =item loop (chained)
 
-This callback is called at the end of each evaluation. It receives no
-parameters and returns nothing.
+This callback is called at the end of each evaluation. It receives whether the
+repl has been requested to terminate so far, and returns whether the repl
+should terminate.
 
 =back
 

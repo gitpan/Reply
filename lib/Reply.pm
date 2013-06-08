@@ -3,16 +3,17 @@ BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::VERSION = '0.06';
+  $Reply::VERSION = '0.07';
 }
 use strict;
 use warnings;
 # ABSTRACT: read, eval, print, loop, yay!
 
-use Config::INI::Reader::Ordered;
 use Module::Runtime qw(compose_module_name use_package_optimistically);
 use Scalar::Util qw(blessed);
 use Try::Tiny;
+
+use Reply::Config;
 
 
 
@@ -26,13 +27,14 @@ sub new {
         _default_plugin => Reply::Plugin::Defaults->new,
     }, $class;
 
-    $self->_load_plugin($_) for @{ $opts{plugins} || [] };
-
     if (defined $opts{config}) {
-        print "Loading configuration from $opts{config}... ";
+        if (!ref($opts{config})) {
+            $opts{config} = Reply::Config->new(file => $opts{config});
+        }
         $self->_load_config($opts{config});
-        print "done\n";
     }
+
+    $self->_load_plugin($_) for @{ $opts{plugins} || [] };
 
     return $self;
 }
@@ -41,24 +43,39 @@ sub new {
 sub run {
     my $self = shift;
 
-    while (defined(my $line = $self->_read)) {
-        try {
-            my @result = $self->_eval($line);
-            $self->_print_result(@result);
-        }
-        catch {
-            $self->_print_error($_);
-        };
-        $self->_loop;
+    while (1) {
+        my $continue = $self->step;
+        last unless $continue;
     }
     print "\n";
 }
 
+
+sub step {
+    my $self = shift;
+    my ($line) = @_;
+
+    $line = $self->_read unless defined $line;
+
+    return unless defined $line;
+
+    $line = $self->_preprocess_line($line);
+
+    try {
+        my @result = $self->_eval($line);
+        $self->_print_result(@result);
+    }
+    catch {
+        $self->_print_error($_);
+    };
+    $self->_loop;
+}
+
 sub _load_config {
     my $self = shift;
-    my ($file) = @_;
+    my ($config) = @_;
 
-    my $data = Config::INI::Reader::Ordered->new->read_file($file);
+    my $data = $config->data;
 
     my $root_config;
     for my $section (@$data) {
@@ -72,7 +89,7 @@ sub _load_config {
     }
 
     for my $line (sort grep { /^script_line/ } keys %$root_config) {
-        $self->_eval($root_config->{$line});
+        $self->step($root_config->{$line});
     }
 
     if (defined(my $file = $root_config->{script_file})) {
@@ -81,7 +98,7 @@ sub _load_config {
             local $/ = undef;
             <$fh>
         };
-        $self->_eval($contents);
+        $self->step($contents);
     }
 }
 
@@ -113,8 +130,12 @@ sub _read {
     my $self = shift;
 
     my $prompt = $self->_wrapped_plugin('prompt');
-    my ($line) = $self->_wrapped_plugin('read_line', $prompt);
-    return if !defined $line;
+    return $self->_wrapped_plugin('read_line', $prompt);
+}
+
+sub _preprocess_line {
+    my $self = shift;
+    my ($line) = @_;
 
     if ($line =~ s/^#(\w+)(?:\s+|$)//) {
         ($line) = $self->_chained_plugin("command_\L$1", $line);
@@ -153,7 +174,7 @@ sub _print_result {
 sub _loop {
     my $self = shift;
 
-    $self->_chained_plugin('loop');
+    $self->_chained_plugin('loop', 1);
 }
 
 sub _wrapped_plugin {
@@ -198,7 +219,7 @@ Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
@@ -237,7 +258,14 @@ An arrayref of additional plugins to load.
 =head2 run
 
 Runs the repl. Will continue looping until the C<read_line> callback returns
-undef.
+undef or the C<loop> callback returns false.
+
+=head2 step($line)
+
+Runs a single iteration of the repl. If C<$line> is given, it will be used as
+the string to evaluate (and the C<prompt> and C<read_line> callbacks will not
+be called). Returns true if the repl can continue, and false if it was
+requested to quit.
 
 =head1 CONFIGURATION
 

@@ -4,11 +4,10 @@ use warnings;
 # PODNAME: reply
 # ABSTRACT: read, eval, print, loop, yay!
 
-use File::HomeDir;
-use File::Spec;
 use Getopt::Long;
 
 use Reply;
+use Reply::Config;
 
 
 my $cfgfile = '.replyrc';
@@ -18,17 +17,13 @@ GetOptions(
     'help'    => sub { usage(0) },
 ) or usage(1);
 
-my $cfg = File::Spec->catfile(
-    (File::Spec->file_name_is_absolute($cfgfile)
-        ? ()
-        : (File::HomeDir->my_home)),
-    $cfgfile
-);
+my $cfg = Reply::Config->new(file => $cfgfile);
 
 my %args = (config => $cfg);
-if (!-e $cfg) {
-    print("$cfg not found. Generating a default...\n");
-    if (open my $fh, '>', $cfg) {
+my $file = $cfg->file;
+if (!-e $file) {
+    print("$file not found. Generating a default...\n");
+    if (open my $fh, '>', $file) {
         my $contents = do {
             local $/;
             <DATA>
@@ -38,7 +33,7 @@ if (!-e $cfg) {
         close $fh;
     }
     else {
-        warn "Couldn't write to $cfg";
+        warn "Couldn't write to $file";
         %args = ();
     }
 }
@@ -63,7 +58,7 @@ reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 

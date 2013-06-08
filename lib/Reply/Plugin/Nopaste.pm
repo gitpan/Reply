@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Nopaste::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Nopaste::VERSION = '0.06';
+  $Reply::Plugin::Nopaste::VERSION = '0.07';
 }
 use strict;
 use warnings;
@@ -57,12 +57,18 @@ sub print_result {
 
 sub loop {
     my $self = shift;
+    my ($continue) = @_;
 
     my $prompt = delete $self->{prompt};
     my $line   = delete $self->{line};
     my $result = delete $self->{result};
 
-    $self->{history} .= "$prompt$line$result";
+    $self->{history} .= "$prompt$line$result"
+        if defined $prompt
+        && defined $line
+        && defined $result;
+
+    $continue;
 }
 
 sub command_nopaste {
@@ -96,7 +102,7 @@ Reply::Plugin::Nopaste - command to nopaste a transcript of the current session
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 

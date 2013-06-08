@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ResultCache::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ResultCache::VERSION = '0.06';
+  $Reply::Plugin::ResultCache::VERSION = '0.07';
 }
 use strict;
 use warnings;
@@ -27,8 +27,9 @@ sub compile {
     my $self = shift;
     my ($next, $line, %args) = @_;
 
-    $args{environment} ||= {};
-    $args{environment}{'@' . $self->{result_name}} = $self->{results};
+    $args{environments}{''.__PACKAGE__} = {
+        "\@$self->{result_name}" => $self->{results},
+    };
 
     $next->($line, %args);
 }
@@ -69,7 +70,7 @@ Reply::Plugin::ResultCache - retain previous results to be able to refer to them
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
