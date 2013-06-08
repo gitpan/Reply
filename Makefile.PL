@@ -33,6 +33,7 @@ my %WriteMakefileArgs = (
     "Scalar::Util" => 0,
     "Term::ANSIColor" => 0,
     "Term::ReadLine" => 0,
+    "Time::HiRes" => 0,
     "Try::Tiny" => 0,
     "base" => 0,
     "strict" => 0,
@@ -43,7 +44,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.05",
+  "VERSION" => "0.06",
   "test" => {
     "TESTS" => "t/*.t"
   }

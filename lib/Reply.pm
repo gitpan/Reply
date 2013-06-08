@@ -3,7 +3,7 @@ BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::VERSION = '0.05';
+  $Reply::VERSION = '0.06';
 }
 use strict;
 use warnings;
@@ -198,7 +198,7 @@ Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

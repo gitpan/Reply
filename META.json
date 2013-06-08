@@ -51,6 +51,7 @@
             "Scalar::Util" : "0",
             "Term::ANSIColor" : "0",
             "Term::ReadLine" : "0",
+            "Time::HiRes" : "0",
             "Try::Tiny" : "0",
             "base" : "0",
             "strict" : "0",
@@ -78,7 +79,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.05",
+   "version" : "0.06",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -327,6 +328,7 @@
    },
    "x_authority" : "cpan:DOY",
    "x_contributors" : [
+      "Arthur Axel 'fREW' Schmidt <frioux@gmail.com>",
       "Jesse Luehrs <doy@tozt.net>",
       "Stanislaw Pusep <creaktive@gmail.com>"
    ]
