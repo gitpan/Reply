@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Editor::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Editor::VERSION = '0.08';
+  $Reply::Plugin::Editor::VERSION = '0.09';
 }
 use strict;
 use warnings;
@@ -77,7 +77,7 @@ Reply::Plugin::Editor - command to edit the current line in a text editor
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
