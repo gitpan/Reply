@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::FancyPrompt::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::FancyPrompt::VERSION = '0.07';
+  $Reply::Plugin::FancyPrompt::VERSION = '0.08';
 }
 use strict;
 use warnings;
@@ -47,7 +47,7 @@ Reply::Plugin::FancyPrompt - provides a more informative prompt
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 

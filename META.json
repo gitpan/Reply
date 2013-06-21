@@ -34,6 +34,7 @@
       "runtime" : {
          "recommends" : {
             "App::Nopaste" : "0",
+            "Class::Refresh" : "0.04",
             "Data::Dump" : "0",
             "Data::Printer" : "0",
             "Proc::InvokeEditor" : "0",
@@ -79,7 +80,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.07",
+   "version" : "0.08",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -330,6 +331,7 @@
    "x_contributors" : [
       "Arthur Axel 'fREW' Schmidt <frioux@gmail.com>",
       "Jesse Luehrs <doy@tozt.net>",
+      "Michael Reddick <michael.reddick@gmail.com>",
       "Stanislaw Pusep <creaktive@gmail.com>"
    ]
 }

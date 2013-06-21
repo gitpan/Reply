@@ -10,6 +10,7 @@ dist.ini
 lib/Reply.pm
 lib/Reply/Config.pm
 lib/Reply/Plugin.pm
+lib/Reply/Plugin/AutoRefresh.pm
 lib/Reply/Plugin/Colors.pm
 lib/Reply/Plugin/DataDump.pm
 lib/Reply/Plugin/DataDumper.pm
