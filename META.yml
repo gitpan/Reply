@@ -46,7 +46,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Reply
   homepage: http://metacpan.org/release/Reply
   repository: git://github.com/doy/reply.git
-version: 0.09
+version: 0.10
 x_Dist_Zilla:
   perl:
     version: 5.018000

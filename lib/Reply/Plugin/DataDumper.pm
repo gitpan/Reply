@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::DataDumper::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::DataDumper::VERSION = '0.09';
+  $Reply::Plugin::DataDumper::VERSION = '0.10';
 }
 use strict;
 use warnings;
@@ -26,7 +26,7 @@ sub new {
 sub mangle_result {
     my $self = shift;
     my (@result) = @_;
-    return Dumper(@result == 0 ? '' : @result == 1 ? $result[0] : \@result);
+    return Dumper(@result == 0 ? () : @result == 1 ? $result[0] : \@result);
 }
 
 1;
@@ -41,7 +41,7 @@ Reply::Plugin::DataDumper - format results using Data::Dumper
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

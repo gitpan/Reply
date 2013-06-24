@@ -8,6 +8,7 @@ README
 bin/reply
 dist.ini
 lib/Reply.pm
+lib/Reply/App.pm
 lib/Reply/Config.pm
 lib/Reply/Plugin.pm
 lib/Reply/Plugin/AutoRefresh.pm

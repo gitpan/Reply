@@ -4,51 +4,12 @@ use warnings;
 # PODNAME: reply
 # ABSTRACT: read, eval, print, loop, yay!
 
-use Getopt::Long;
-
-use Reply;
-use Reply::Config;
+use Reply::App;
 
 
-my $cfgfile = '.replyrc';
-GetOptions(
-    'cfg:s'   => \$cfgfile,
-    'version' => sub { version() },
-    'help'    => sub { usage(0) },
-) or usage(1);
+exit(Reply::App->new->run(@ARGV));
 
-my $cfg = Reply::Config->new(file => $cfgfile);
-
-my %args = (config => $cfg);
-my $file = $cfg->file;
-if (!-e $file) {
-    print("$file not found. Generating a default...\n");
-    if (open my $fh, '>', $file) {
-        my $contents = do {
-            local $/;
-            <DATA>
-        };
-        $contents =~ s/use 5.XXX/use $]/;
-        print $fh $contents;
-        close $fh;
-    }
-    else {
-        warn "Couldn't write to $file";
-        %args = ();
-    }
-}
-
-Reply->new(%args)->run;
-
-sub usage {
-    print "    reply [--version] [--help] [--cfg file]\n";
-    exit($_[0]);
-}
-
-sub version {
-    print "Reply version $Reply::VERSION\n";
-    exit(0);
-}
+__END__
 
 =pod
 
@@ -58,7 +19,7 @@ reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 
@@ -86,18 +47,3 @@ This is free software, licensed under:
   The MIT (X11) License
 
 =cut
-
-__DATA__
-script_line1 = use strict
-script_line2 = use warnings
-script_line3 = use 5.XXX
-
-[Interrupt]
-[FancyPrompt]
-[DataDumper]
-[Colors]
-[ReadLine]
-[Hints]
-[Packages]
-[LexicalPersistence]
-[ResultCache]
