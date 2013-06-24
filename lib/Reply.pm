@@ -3,13 +3,13 @@ BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::VERSION = '0.10';
+  $Reply::VERSION = '0.11';
 }
 use strict;
 use warnings;
 # ABSTRACT: read, eval, print, loop, yay!
 
-use Module::Runtime qw(compose_module_name use_package_optimistically);
+use Module::Runtime qw(compose_module_name require_module);
 use Scalar::Util qw(blessed);
 use Try::Tiny;
 
@@ -108,7 +108,7 @@ sub _load_plugin {
 
     if (!blessed($plugin)) {
         $plugin = compose_module_name("Reply::Plugin", $plugin);
-        use_package_optimistically($plugin);
+        require_module($plugin);
         die "$plugin is not a valid plugin"
             unless $plugin->isa("Reply::Plugin");
         $plugin = $plugin->new(%$opts);
@@ -219,7 +219,7 @@ Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
