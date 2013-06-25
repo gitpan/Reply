@@ -1,5 +1,9 @@
 Revision history for Reply
 
+0.12  2013-06-25
+      - make the AutoRefresh plugin use the new track_require functionality
+        in Class::Refresh (fixes a problem reported by Michael Reddick)
+
 0.11  2013-06-24
       - report failure to load of plugins which use modules that fail to load
         (reported by Michael Reddick)

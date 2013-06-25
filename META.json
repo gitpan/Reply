@@ -34,7 +34,7 @@
       "runtime" : {
          "recommends" : {
             "App::Nopaste" : "0",
-            "Class::Refresh" : "0.04",
+            "Class::Refresh" : "0.05",
             "Data::Dump" : "0",
             "Data::Printer" : "0",
             "Proc::InvokeEditor" : "0",
@@ -80,7 +80,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.11",
+   "version" : "0.12",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
