@@ -3,7 +3,7 @@ BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::VERSION = '0.14';
+  $Reply::VERSION = '0.15';
 }
 use strict;
 use warnings;
@@ -68,7 +68,9 @@ sub step {
     catch {
         $self->_print_error($_);
     };
-    $self->_loop;
+
+    my ($continue) = $self->_loop;
+    return $continue;
 }
 
 sub _load_config {
@@ -219,7 +221,7 @@ Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -258,7 +260,8 @@ An arrayref of additional plugins to load.
 =head2 run
 
 Runs the repl. Will continue looping until the C<read_line> callback returns
-undef or the C<loop> callback returns false.
+undef (typically when the user presses C<Ctrl+D>), or the C<loop> callback
+returns false (by default, the C<#q> command quits the repl in this way).
 
 =head2 step($line)
 

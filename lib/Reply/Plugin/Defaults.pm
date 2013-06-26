@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.14';
+  $Reply::Plugin::Defaults::VERSION = '0.15';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -20,6 +20,15 @@ use warnings;
 use base 'Reply::Plugin';
 
 use Eval::Closure;
+
+sub new {
+    my $class = shift;
+
+    my $self = $class->SUPER::new(@_);
+    $self->{quit} = 0;
+
+    return $self;
+}
 
 sub prompt { "> " }
 
@@ -84,5 +93,29 @@ sub print_result {
     print @result, "\n"
         if @result;
 }
+
+sub command_q {
+    my $self = shift;
+    $self->{quit} = 1;
+    return '';
+}
+
+sub loop {
+    my $self = shift;
+    my ($continue) = @_;
+
+    $continue = 0 if $self->{quit};
+
+    return $continue;
+}
+
+=begin Pod::Coverage
+
+  new
+  command_q
+
+=end Pod::Coverage
+
+=cut
 
 1;
