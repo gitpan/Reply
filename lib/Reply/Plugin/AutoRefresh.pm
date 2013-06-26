@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::AutoRefresh::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::AutoRefresh::VERSION = '0.15';
+  $Reply::Plugin::AutoRefresh::VERSION = '0.16';
 }
 use strict;
 use warnings;
@@ -52,7 +52,7 @@ Reply::Plugin::AutoRefresh - automatically refreshes the external code you use
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 

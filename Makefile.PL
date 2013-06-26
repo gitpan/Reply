@@ -27,7 +27,7 @@ my %WriteMakefileArgs = (
     "Eval::Closure" => 0,
     "File::HomeDir" => 0,
     "File::Spec" => 0,
-    "Getopt::Long" => 0,
+    "Getopt::Long" => "2.36",
     "Module::Runtime" => 0,
     "PadWalker" => 0,
     "Scalar::Util" => 0,
@@ -44,7 +44,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.15",
+  "VERSION" => "0.16",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -3,13 +3,13 @@ BEGIN {
   $Reply::App::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::App::VERSION = '0.15';
+  $Reply::App::VERSION = '0.16';
 }
 use strict;
 use warnings;
 # ABSTRACT: command line app runner for Reply
 
-use Getopt::Long 'GetOptionsFromArray';
+use Getopt::Long 2.36 'GetOptionsFromArray';
 
 use Reply;
 use Reply::Config;
@@ -96,7 +96,7 @@ Reply::App - command line app runner for Reply
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 
