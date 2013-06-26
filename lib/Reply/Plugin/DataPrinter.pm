@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::DataPrinter::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::DataPrinter::VERSION = '0.12';
+  $Reply::Plugin::DataPrinter::VERSION = '0.13';
 }
 use strict;
 use warnings;
@@ -31,7 +31,7 @@ Reply::Plugin::DataPrinter - format results using Data::Printer
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
