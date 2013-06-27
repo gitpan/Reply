@@ -3,7 +3,7 @@
    "author" : [
       "Jesse Luehrs <doy at cpan dot org>"
    ],
-   "dynamic_config" : 0,
+   "dynamic_config" : 1,
    "generated_by" : "Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "mit"
@@ -80,7 +80,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.16",
+   "version" : "0.17",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -287,6 +287,16 @@
             },
             "name" : "RuntimeRecommends",
             "version" : "4.300034"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::OSPrereqs",
+            "config" : {
+               "Dist::Zilla::Plugin::OSPrereqs" : {
+                  "os" : "MSWin32"
+               }
+            },
+            "name" : "MSWin32",
+            "version" : "0.003"
          },
          {
             "class" : "Dist::Zilla::Plugin::FinderCode",

@@ -8,7 +8,7 @@ build_requires:
   Test::More: 0.88
 configure_requires:
   ExtUtils::MakeMaker: 6.30
-dynamic_config: 0
+dynamic_config: 1
 generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921'
 license: mit
 meta-spec:
@@ -46,7 +46,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Reply
   homepage: http://metacpan.org/release/Reply
   repository: git://github.com/doy/reply.git
-version: 0.16
+version: 0.17
 x_Dist_Zilla:
   perl:
     version: 5.018000
@@ -211,6 +211,13 @@ x_Dist_Zilla:
           type: recommends
       name: RuntimeRecommends
       version: 4.300034
+    -
+      class: Dist::Zilla::Plugin::OSPrereqs
+      config:
+        Dist::Zilla::Plugin::OSPrereqs:
+          os: MSWin32
+      name: MSWin32
+      version: 0.003
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'

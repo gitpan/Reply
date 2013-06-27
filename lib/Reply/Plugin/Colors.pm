@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Colors::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Colors::VERSION = '0.16';
+  $Reply::Plugin::Colors::VERSION = '0.17';
 }
 use strict;
 use warnings;
@@ -12,6 +12,12 @@ use warnings;
 use base 'Reply::Plugin';
 
 use Term::ANSIColor;
+BEGIN {
+    if ($^O eq 'MSWin32') {
+        require Win32::Console::ANSI;
+        Win32::Console::ANSI->import;
+    }
+}
 
 
 sub new {
@@ -85,7 +91,7 @@ Reply::Plugin::Colors - colorize output
 
 =head1 VERSION
 
-version 0.16
+version 0.17
 
 =head1 SYNOPSIS
 
