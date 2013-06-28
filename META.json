@@ -82,7 +82,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.19",
+   "version" : "0.20",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -345,7 +345,8 @@
       "Jesse Luehrs <doy@tozt.net>",
       "Michael Reddick <michael.reddick@gmail.com>",
       "Shawn M Moore <code@sartak.org>",
-      "Stanislaw Pusep <creaktive@gmail.com>"
+      "Stanislaw Pusep <creaktive@gmail.com>",
+      "Toby Inkster <mail@tobyinkster.co.uk>"
    ]
 }
 

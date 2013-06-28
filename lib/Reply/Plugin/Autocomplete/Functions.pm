@@ -1,0 +1,85 @@
+package Reply::Plugin::Autocomplete::Functions;
+BEGIN {
+  $Reply::Plugin::Autocomplete::Functions::AUTHORITY = 'cpan:DOY';
+}
+{
+  $Reply::Plugin::Autocomplete::Functions::VERSION = '0.20';
+}
+use strict;
+use warnings;
+# ABSTRACT: tab completion for function names
+
+use base 'Reply::Plugin';
+
+use Module::Runtime '$module_name_rx';
+use Package::Stash;
+
+
+sub tab_handler {
+    my $self = shift;
+    my ($line) = @_;
+
+    my ($before, $fragment) = $line =~ /(.*?)(${module_name_rx}(::)?)$/;
+    return unless $fragment;
+
+    my ($package, $func);
+    if ($fragment =~ /:/) {
+        ($package, $func) = ($fragment =~ /^(.+:)(\w*)$/);
+        $func = '' unless defined $func;
+        $package =~ s/:{1,2}$//;
+    }
+    else {
+        $package = $self->{'package'};
+        $func = $fragment;
+    }
+
+    return
+        map  { $package eq $self->{'package'} ? $_ : "$package\::$_" }
+        grep { $func ? /^\Q$func/ : 1 }
+        'Package::Stash'->new($package)->list_all_symbols('CODE');
+}
+
+sub package {
+    my $self = shift;
+    my ($pkg) = @_;
+    $self->{'package'} = $pkg;
+}
+
+1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+Reply::Plugin::Autocomplete::Functions - tab completion for function names
+
+=head1 VERSION
+
+version 0.20
+
+=head1 SYNOPSIS
+
+  ; .replyrc
+  [ReadLine]
+  [Autocomplete::Functions]
+
+=head1 DESCRIPTION
+
+This plugin registers a tab key handler to autocomplete function names in Perl
+code, including imported functions.
+
+=head1 AUTHOR
+
+Jesse Luehrs <doy at cpan dot org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2013 by Jesse Luehrs.
+
+This is free software, licensed under:
+
+  The MIT (X11) License
+
+=cut

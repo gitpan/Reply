@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Keywords::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Keywords::VERSION = '0.19';
+  $Reply::Plugin::Autocomplete::Keywords::VERSION = '0.20';
 }
 use strict;
 use warnings;
@@ -20,6 +20,7 @@ sub tab_handler {
 
     my ($before, $last_word) = $line =~ /(.*?)(\w+)$/;
     return unless $last_word;
+    return if $before =~ /::$/; # Package::function call
     return if $before =~ /[\$\@\%\&\*]\s*$/;
 
     my $re = qr/^\Q$last_word/;
@@ -39,7 +40,7 @@ Reply::Plugin::Autocomplete::Keywords - tab completion for perl keywords
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 SYNOPSIS
 

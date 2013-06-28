@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Packages::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Packages::VERSION = '0.19';
+  $Reply::Plugin::Autocomplete::Packages::VERSION = '0.20';
 }
 use strict;
 use warnings;
@@ -37,7 +37,19 @@ sub tab_handler {
         }
     }
 
+    push @results,
+        grep m/^\Q$package_fragment/,
+        @{$self->{moar_packages}||=[]};
+
     return @results;
+}
+
+# listen for events from the Packages plugin, for its wise wisdom
+# can teach us about packages that are not in %INC
+sub package {
+    my $self = shift;
+    my ($pkg) = @_;
+    push @{$self->{moar_packages}||=[]}, $pkg;
 }
 
 1;
@@ -52,7 +64,7 @@ Reply::Plugin::Autocomplete::Packages - tab completion for package names
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 SYNOPSIS
 

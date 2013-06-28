@@ -12,6 +12,7 @@ lib/Reply/App.pm
 lib/Reply/Config.pm
 lib/Reply/Plugin.pm
 lib/Reply/Plugin/AutoRefresh.pm
+lib/Reply/Plugin/Autocomplete/Functions.pm
 lib/Reply/Plugin/Autocomplete/Globals.pm
 lib/Reply/Plugin/Autocomplete/Keywords.pm
 lib/Reply/Plugin/Autocomplete/Lexicals.pm
