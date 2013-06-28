@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::LexicalPersistence::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::LexicalPersistence::VERSION = '0.17';
+  $Reply::Plugin::LexicalPersistence::VERSION = '0.18';
 }
 use strict;
 use warnings;
@@ -16,8 +16,11 @@ use PadWalker 'peek_sub';
 
 sub new {
     my $class = shift;
+    my %opts = @_;
+
     my $self = $class->SUPER::new(@_);
     $self->{env} = {};
+
     return $self;
 }
 
@@ -25,18 +28,14 @@ sub compile {
     my $self = shift;
     my ($next, $line, %args) = @_;
 
-    $args{environment} ||= {};
-    $args{environment} = {
-        %{ $args{environment} },
-        %{ $self->{env} },
-    };
-
     my ($code) = $next->($line, %args);
 
     $self->{env} = {
         %{ $self->{env} },
         %{ peek_sub($code) },
     };
+
+    $self->publish('lexical_environment', default => $self->{env});
 
     return $code;
 }
@@ -53,7 +52,7 @@ Reply::Plugin::LexicalPersistence - persists lexical variables between lines
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ResultCache::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ResultCache::VERSION = '0.17';
+  $Reply::Plugin::ResultCache::VERSION = '0.18';
 }
 use strict;
 use warnings;
@@ -23,17 +23,6 @@ sub new {
     return $self;
 }
 
-sub compile {
-    my $self = shift;
-    my ($next, $line, %args) = @_;
-
-    $args{environments}{''.__PACKAGE__} = {
-        "\@$self->{result_name}" => $self->{results},
-    };
-
-    $next->($line, %args);
-}
-
 sub execute {
     my $self = shift;
     my ($next, @args) = @_;
@@ -45,6 +34,13 @@ sub execute {
     elsif (@res > 1) {
         push @{ $self->{results} }, \@res;
     }
+
+    $self->publish(
+        'lexical_environment',
+        result_cache => {
+            "\@$self->{result_name}" => $self->{results},
+        },
+    );
 
     return @res;
 }
@@ -70,7 +66,7 @@ Reply::Plugin::ResultCache - retain previous results to be able to refer to them
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 

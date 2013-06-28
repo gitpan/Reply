@@ -3,7 +3,7 @@ BEGIN {
   $Reply::App::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::App::VERSION = '0.17';
+  $Reply::App::VERSION = '0.18';
 }
 use strict;
 use warnings;
@@ -96,7 +96,7 @@ Reply::App - command line app runner for Reply
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 
@@ -156,3 +156,5 @@ script_line3 = use 5.XXX
 [Packages]
 [LexicalPersistence]
 [ResultCache]
+[Autocomplete::Packages]
+[Autocomplete::Lexicals]

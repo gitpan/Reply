@@ -34,9 +34,11 @@
       "runtime" : {
          "recommends" : {
             "App::Nopaste" : "0",
+            "B::Keywords" : "0",
             "Class::Refresh" : "0.05",
             "Data::Dump" : "0",
             "Data::Printer" : "0",
+            "Package::Stash" : "0",
             "Proc::InvokeEditor" : "0",
             "Term::ReadLine::Gnu" : "0"
          },
@@ -80,7 +82,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.17",
+   "version" : "0.18",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -342,6 +344,7 @@
       "Arthur Axel 'fREW' Schmidt <frioux@gmail.com>",
       "Jesse Luehrs <doy@tozt.net>",
       "Michael Reddick <michael.reddick@gmail.com>",
+      "Shawn M Moore <code@sartak.org>",
       "Stanislaw Pusep <creaktive@gmail.com>"
    ]
 }

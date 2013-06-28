@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ReadLine::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ReadLine::VERSION = '0.17';
+  $Reply::Plugin::ReadLine::VERSION = '0.18';
 }
 use strict;
 use warnings;
@@ -13,6 +13,7 @@ use base 'Reply::Plugin';
 
 use File::HomeDir;
 use File::Spec;
+use Scalar::Util 'weaken';
 use Term::ReadLine;
 
 
@@ -47,6 +48,8 @@ sub new {
             if -e $self->{history_file};
     }
 
+    $self->_register_tab_complete;
+
     return $self;
 }
 
@@ -69,6 +72,31 @@ sub DESTROY {
         or warn "Couldn't write history to $self->{history_file}";
 }
 
+sub _register_tab_complete {
+    my $self = shift;
+
+    my $term = $self->{term};
+
+    weaken(my $weakself = $self);
+
+    if ($term->ReadLine eq 'Term::ReadLine::Gnu') {
+        $term->Attribs->{attempted_completion_function} = sub {
+            my ($text, $line, $start, $end) = @_;
+
+            # discard everything after the cursor for completion purposes
+            substr($line, $end) = '';
+
+            my @matches = $weakself->publish('tab_handler', $line);
+            my $match_index = 0;
+
+            return $term->completion_matches($text, sub {
+                my ($text, $index) = @_;
+                return $matches[$index];
+            });
+        };
+    }
+}
+
 1;
 
 __END__
@@ -81,7 +109,7 @@ Reply::Plugin::ReadLine - use Term::ReadLine for user input
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 

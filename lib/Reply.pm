@@ -3,14 +3,14 @@ BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::VERSION = '0.17';
+  $Reply::VERSION = '0.18';
 }
 use strict;
 use warnings;
 # ABSTRACT: read, eval, print, loop, yay!
 
 use Module::Runtime qw(compose_module_name require_module);
-use Scalar::Util qw(blessed);
+use Scalar::Util qw(blessed weaken);
 use Try::Tiny;
 
 use Reply::Config;
@@ -21,11 +21,10 @@ sub new {
     my $class = shift;
     my %opts = @_;
 
-    require Reply::Plugin::Defaults;
-    my $self = bless {
-        plugins         => [],
-        _default_plugin => Reply::Plugin::Defaults->new,
-    }, $class;
+    my $self = bless {}, $class;
+
+    $self->{plugins} = [];
+    $self->{_default_plugin} = $self->_instantiate_plugin('Defaults');
 
     if (defined $opts{config}) {
         if (!ref($opts{config})) {
@@ -108,15 +107,31 @@ sub _load_plugin {
     my $self = shift;
     my ($plugin, $opts) = @_;
 
+    $plugin = $self->_instantiate_plugin($plugin, $opts);
+
+    push @{ $self->{plugins} }, $plugin;
+}
+
+sub _instantiate_plugin {
+    my $self = shift;
+    my ($plugin, $opts) = @_;
+
     if (!blessed($plugin)) {
         $plugin = compose_module_name("Reply::Plugin", $plugin);
         require_module($plugin);
         die "$plugin is not a valid plugin"
             unless $plugin->isa("Reply::Plugin");
-        $plugin = $plugin->new(%$opts);
+
+        my $weakself = $self;
+        weaken($weakself);
+
+        $plugin = $plugin->new(
+            %$opts,
+            publisher => sub { $weakself->_publish(@_) },
+        );
     }
 
-    push @{ $self->{plugins} }, $plugin;
+    return $plugin;
 }
 
 sub _plugins {
@@ -179,6 +194,12 @@ sub _loop {
     $self->_chained_plugin('loop', 1);
 }
 
+sub _publish {
+    my $self = shift;
+
+    $self->_concatenate_plugin(@_);
+}
+
 sub _wrapped_plugin {
     my $self = shift;
     my @plugins = ref($_[0]) ? @{ shift() } : $self->_plugins;
@@ -208,6 +229,22 @@ sub _chained_plugin {
     return @args;
 }
 
+sub _concatenate_plugin {
+    my $self = shift;
+    my @plugins = ref($_[0]) ? @{ shift() } : $self->_plugins;
+    my ($method, @args) = @_;
+
+    @plugins = grep { $_->can($method) } @plugins;
+
+    my @results;
+
+    for my $plugin (@plugins) {
+        push @results, $plugin->$method(@args);
+    }
+
+    return @results;
+}
+
 
 1;
 
@@ -221,7 +258,7 @@ Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 

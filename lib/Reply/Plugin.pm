@@ -3,14 +3,30 @@ BEGIN {
   $Reply::Plugin::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::VERSION = '0.17';
+  $Reply::Plugin::VERSION = '0.18';
 }
 use strict;
 use warnings;
 # ABSTRACT: base class for Reply plugins
 
 
-sub new { bless {}, shift }
+sub new {
+    my $class = shift;
+    my (%opts) = @_;
+
+    die "publisher is required" unless $opts{publisher};
+
+    return bless {
+        publisher => $opts{publisher},
+    }, $class;
+}
+
+
+sub publish {
+    my $self = shift;
+
+    $self->{publisher}->(@_);
+}
 
 
 1;
@@ -25,7 +41,7 @@ Reply::Plugin - base class for Reply plugins
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 
@@ -101,23 +117,7 @@ Compiles the string of Perl code into a coderef. Takes the line of code as a
 string and a hash of extra parameters, and returns the coderef to be executed.
 The default implementation uses L<Eval::Closure> to compile the given string.
 
-The extra parameters can be anything that C<eval_closure> supports, as well as
-these additional parameters:
-
-=over 4
-
-=item package
-
-The package to use to evaluate the code within. Defaults to C<main>.
-
-=item environments
-
-A hashref of additional lexical environments to be merged with the main lexical
-environment in the C<environment> key. This allows plugins to ensure that their
-extra additions to the lexical scope remain visible, even if other plugins
-change what "the current lexical scope" means.
-
-=back
+The hash of extra parameters is passed directly to C<eval_closure>.
 
 =item execute
 
@@ -158,6 +158,51 @@ repl has been requested to terminate so far, and returns whether the repl
 should terminate.
 
 =back
+
+Reply plugins can also communicate among each other via a pub/sub mechanism. By
+calling the C<publish> method, all plugins which respond to the given message
+(implement a method of the given name) will have that method called with the
+given arguments, and all of the responses will be collected and returned. Some
+messages used by the default plugins are:
+
+=over 4
+
+=item tab_handler ($line)
+
+Plugins can publish this message when they want to attempt tab completion.
+Plugins that respond to this message should return a list of potential
+completions of the line which is passed in.
+
+=item lexical_environment ($name, $env)
+
+Plugins which wish to modify the lexical environment should do so by publishing
+this message. This will register it with the repl itself, as well as allowing
+other plugins which introspect the lexical environment to see it.
+
+There can be more than one lexical environment, which are all merged together
+when the line is evaluated. C<default> is the primary environment (typically
+corresponding to the user's code). All other environments should typically have
+unique names, and are used to add additonal variables to the environment that
+won't be overridden if a plugin decides to replace the default environment.
+
+=item package ($name)
+
+Plugins which wish to modify the currently active package should do so by
+publishing this message. This will register it with the repl itself, as well as
+allowing other plugins which introspect the current package to see it.
+
+=back
+
+Your plugins, however, are not limited to these messages - you can use whatever
+messages you want to communicate.
+
+=head1 METHODS
+
+=head2 publish ($name, @args)
+
+Publish a message to other plugins which respond to it. All loaded plugins
+which implement a method named C<$name> will have it called with C<@args> as
+the parameters. Returns a list of everything that each plugin responded with.
 
 =for Pod::Coverage new
 

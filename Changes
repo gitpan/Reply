@@ -1,5 +1,9 @@
 Revision history for Reply
 
+0.18  2013-06-27
+      - tab completion support (with help from sartak)
+      - lots of internal refactorings to make writing plugins easier
+
 0.17  2013-06-27
       - support color on windows (aero)
 

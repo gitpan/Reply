@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Config::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Config::VERSION = '0.17';
+  $Reply::Config::VERSION = '0.18';
 }
 use strict;
 use warnings;
@@ -59,7 +59,7 @@ Reply::Config - config loading for Reply
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 

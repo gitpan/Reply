@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Packages::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Packages::VERSION = '0.17';
+  $Reply::Plugin::Packages::VERSION = '0.18';
 }
 use strict;
 use warnings;
@@ -18,6 +18,8 @@ sub new {
 
     my $self = $class->SUPER::new(@_);
     $self->{package} = $opts{default_package} || 'main';
+
+    $self->publish('package', $self->{package});
 
     return $self;
 }
@@ -40,14 +42,13 @@ sub compile {
     my $self = shift;
     my ($next, $line, %args) = @_;
 
-    $args{package} = $self->{package};
-
     my @result = $next->($line, %args);
 
     # XXX it'd be nice to avoid using globals here, but we can't use
     # eval_closure's environment parameter since we need to access the
     # information in a BEGIN block
     $self->{package} = our $package;
+    $self->publish('package', $self->{package});
 
     return @result;
 }
@@ -64,7 +65,7 @@ Reply::Plugin::Packages - persist the current package between lines
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 
