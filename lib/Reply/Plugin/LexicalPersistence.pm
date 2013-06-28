@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::LexicalPersistence::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::LexicalPersistence::VERSION = '0.18';
+  $Reply::Plugin::LexicalPersistence::VERSION = '0.19';
 }
 use strict;
 use warnings;
@@ -52,7 +52,7 @@ Reply::Plugin::LexicalPersistence - persists lexical variables between lines
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 

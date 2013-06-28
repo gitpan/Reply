@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Interrupt::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Interrupt::VERSION = '0.18';
+  $Reply::Plugin::Interrupt::VERSION = '0.19';
 }
 use strict;
 use warnings;
@@ -40,7 +40,7 @@ Reply::Plugin::Interrupt - allows using Ctrl+C to interrupt long-running lines
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 

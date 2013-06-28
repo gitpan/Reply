@@ -18,7 +18,7 @@ find(
     $found =~ s{^lib/}{};
     $found =~ s{[/\\]}{::}g;
     $found =~ s/\.pm$//;
-    return if $found =~ /::(?:Nopaste|DataDump|DataPrinter|Editor|AutoRefresh)$/;
+    return if $found =~ /::(?:Nopaste|DataDump|DataPrinter|Editor|AutoRefresh|Autocomplete::Keywords|Autocomplete::Globals|Autocomplete::Methods)$/;
     push @modules, $found;
   },
   'lib',
@@ -32,7 +32,7 @@ sub _find_scripts {
       sub {
         return unless -f;
         my $found = $File::Find::name;
-        return if $found =~ /::(?:Nopaste|DataDump|DataPrinter|Editor|AutoRefresh)$/;
+        return if $found =~ /::(?:Nopaste|DataDump|DataPrinter|Editor|AutoRefresh|Autocomplete::Keywords|Autocomplete::Globals|Autocomplete::Methods)$/;
         open my $FH, '<', $_ or do {
           note( "Unable to open $found in ( $! ), skipping" );
           return;

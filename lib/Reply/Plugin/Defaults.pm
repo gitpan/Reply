@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.18';
+  $Reply::Plugin::Defaults::VERSION = '0.19';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
