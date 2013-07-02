@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Colors::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Colors::VERSION = '0.21';
+  $Reply::Plugin::Colors::VERSION = '0.22';
 }
 use strict;
 use warnings;
@@ -91,7 +91,7 @@ Reply::Plugin::Colors - colorize output
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 

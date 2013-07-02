@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Globals::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Globals::VERSION = '0.21';
+  $Reply::Plugin::Autocomplete::Globals::VERSION = '0.22';
 }
 use strict;
 use warnings;
@@ -121,7 +121,7 @@ Reply::Plugin::Autocomplete::Globals - tab completion for global variables
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 

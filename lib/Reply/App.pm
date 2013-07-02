@@ -3,7 +3,7 @@ BEGIN {
   $Reply::App::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::App::VERSION = '0.21';
+  $Reply::App::VERSION = '0.22';
 }
 use strict;
 use warnings;
@@ -96,7 +96,7 @@ Reply::App - command line app runner for Reply
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 

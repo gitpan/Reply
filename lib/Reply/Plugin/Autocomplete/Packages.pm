@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Packages::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Packages::VERSION = '0.21';
+  $Reply::Plugin::Autocomplete::Packages::VERSION = '0.22';
 }
 use strict;
 use warnings;
@@ -21,6 +21,7 @@ sub tab_handler {
     # $module_name_rx does not permit trailing ::
     my ($before, $package_fragment) = $line =~ /(.*?)(${module_name_rx}:?:?)$/;
     return unless $package_fragment;
+    return if $before =~ /->\s*$/; # method call
     return if $before =~ /[\$\@\%\&\*]\s*$/;
 
     my $file_fragment = $package_fragment;
@@ -64,7 +65,7 @@ Reply::Plugin::Autocomplete::Packages - tab completion for package names
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 
