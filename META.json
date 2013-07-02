@@ -38,6 +38,7 @@
             "Class::Refresh" : "0.05",
             "Data::Dump" : "0",
             "Data::Printer" : "0",
+            "MRO::Compat" : "0",
             "Package::Stash" : "0",
             "Proc::InvokeEditor" : "0",
             "Term::ReadLine::Gnu" : "0"
@@ -82,7 +83,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.20",
+   "version" : "0.21",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"

@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Methods::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Methods::VERSION = '0.20';
+  $Reply::Plugin::Autocomplete::Methods::VERSION = '0.21';
 }
 use strict;
 use warnings;
@@ -11,6 +11,7 @@ use warnings;
 
 use base 'Reply::Plugin';
 
+use MRO::Compat;
 use Package::Stash;
 use Scalar::Util 'blessed';
 
@@ -44,9 +45,11 @@ sub tab_handler {
     my ($line) = @_;
 
     my ($invocant, $method) = $line =~ /((?:\$\s*)?[A-Z_a-z][0-9A-Z_a-z:]*)->([A-Z_a-z][0-9A-Z_a-z]*)?$/;
-    return unless $method;
+    return unless $invocant;
 
-    my $package;
+    $method = '' unless defined $method;
+
+    my $class;
     if ($invocant =~ /^\$/) {
         my $env = {
             (map { %$_ } values %{ $self->{env} }),
@@ -54,23 +57,30 @@ sub tab_handler {
         };
         my $var = $env->{$invocant};
         return unless $var && ref($var) eq 'REF' && blessed($$var);
-        $package = blessed($$var);
+        $class = blessed($$var);
     }
     else {
-        $package = $invocant;
+        $class = $invocant;
     }
 
-    my $stash = eval { Package::Stash->new($package) };
-    return unless $stash;
+    my @mro = (
+        @{ mro::get_linear_isa('UNIVERSAL') },
+        @{ mro::get_linear_isa($class) },
+    );
 
     my @results;
-    for my $stash_method ($stash->list_all_symbols('CODE')) {
-        next unless index($stash_method, $method) == 0;
+    for my $package (@mro) {
+        my $stash = eval { Package::Stash->new($package) };
+        next unless $stash;
 
-        push @results, $stash_method;
+        for my $stash_method ($stash->list_all_symbols('CODE')) {
+            next unless index($stash_method, $method) == 0;
+
+            push @results, $stash_method;
+        }
     }
 
-    return @results;
+    return sort @results;
 }
 
 1;
@@ -85,7 +95,7 @@ Reply::Plugin::Autocomplete::Methods - tab completion for methods
 
 =head1 VERSION
 
-version 0.20
+version 0.21
 
 =head1 SYNOPSIS
 

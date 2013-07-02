@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Globals::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Globals::VERSION = '0.20';
+  $Reply::Plugin::Autocomplete::Globals::VERSION = '0.21';
 }
 use strict;
 use warnings;
@@ -34,9 +34,10 @@ sub tab_handler {
 
     my @parts = split '::', $rest, -1;
     return if grep { /:/ } @parts;
-    return if $parts[0] =~ /^[0-9]/;
+    return if @parts && $parts[0] =~ /^[0-9]/;
 
     my $var_prefix = pop @parts;
+    $var_prefix = '' unless defined $var_prefix;
 
     my $stash_name = join('::', @parts);
     my $stash = eval {
@@ -77,6 +78,15 @@ sub _recursive_symbols {
 
     my @symbols;
     for my $name ($stash->list_all_symbols) {
+        # main can have things in it like "_<reader Foo::bar (defined at ...)"
+        # which aren't real variables - don't complete them, because we only
+        # care about things that can be used as literal variable names. be sure
+        # to not also block out punctuation variables.
+        # XXX fix for unicode
+        # XXX fix for variables like ${^GLOBAL_PHASE}
+        next unless $name =~ /^[A-Z_a-z][0-9A-Z_a-z]*(?:::)?$/
+                 || length($name) == 1;
+
         if ($name =~ s/::$//) {
             my $next = Package::Stash->new(join('::', $stash_name, $name));
             next if $next->namespace == $stash->namespace;
@@ -111,7 +121,7 @@ Reply::Plugin::Autocomplete::Globals - tab completion for global variables
 
 =head1 VERSION
 
-version 0.20
+version 0.21
 
 =head1 SYNOPSIS
 

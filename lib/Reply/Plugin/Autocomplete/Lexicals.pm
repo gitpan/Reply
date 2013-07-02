@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Lexicals::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Lexicals::VERSION = '0.20';
+  $Reply::Plugin::Autocomplete::Lexicals::VERSION = '0.21';
 }
 use strict;
 use warnings;
@@ -76,7 +76,7 @@ Reply::Plugin::Autocomplete::Lexicals - tab completion for lexical variables
 
 =head1 VERSION
 
-version 0.20
+version 0.21
 
 =head1 SYNOPSIS
 

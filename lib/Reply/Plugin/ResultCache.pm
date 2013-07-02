@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ResultCache::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ResultCache::VERSION = '0.20';
+  $Reply::Plugin::ResultCache::VERSION = '0.21';
 }
 use strict;
 use warnings;
@@ -66,7 +66,7 @@ Reply::Plugin::ResultCache - retain previous results to be able to refer to them
 
 =head1 VERSION
 
-version 0.20
+version 0.21
 
 =head1 SYNOPSIS
 
