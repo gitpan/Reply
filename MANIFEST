@@ -34,6 +34,7 @@ lib/Reply/Plugin/Packages.pm
 lib/Reply/Plugin/ReadLine.pm
 lib/Reply/Plugin/ResultCache.pm
 lib/Reply/Plugin/Timer.pm
+lib/Reply/Util.pm
 t/00-compile.t
 xt/release/eol.t
 xt/release/no-tabs.t

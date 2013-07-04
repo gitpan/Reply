@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Lexicals::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Lexicals::VERSION = '0.23';
+  $Reply::Plugin::Autocomplete::Lexicals::VERSION = '0.24';
 }
 use strict;
 use warnings;
@@ -11,36 +11,38 @@ use warnings;
 
 use base 'Reply::Plugin';
 
+use Reply::Util qw($varname_rx);
 
-# XXX unicode?
-my $var_name_rx = qr/[\$\@\%]\s*(?:[A-Z_a-z][0-9A-Z_a-z]*)?/;
 
 sub new {
     my $class = shift;
 
     my $self = $class->SUPER::new(@_);
-    $self->{env} = {};
+    $self->{env} = [];
 
     return $self;
 }
 
 sub lexical_environment {
     my $self = shift;
-    my ($name, $env) = @_;
+    my ($env) = @_;
 
-    $self->{env}{$name} = $env;
+    push @{ $self->{env} }, $env;
 }
 
 sub tab_handler {
     my $self = shift;
     my ($line) = @_;
 
-    my ($var) = $line =~ /($var_name_rx)$/;
+    my ($var) = $line =~ /($varname_rx)$/;
     return unless $var;
 
     my ($sigil, $name_prefix) = $var =~ /(.)(.*)/;
 
-    my $env = { map { %$_ } values %{ $self->{env} } };
+    # these can't be lexicals
+    return if $sigil eq '&' || $sigil eq '*';
+
+    my $env = { map { %$_ } @{ $self->{env} } };
     my @env = keys %$env;
 
     my @results;
@@ -76,7 +78,7 @@ Reply::Plugin::Autocomplete::Lexicals - tab completion for lexical variables
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 SYNOPSIS
 

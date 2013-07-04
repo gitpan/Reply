@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ResultCache::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ResultCache::VERSION = '0.23';
+  $Reply::Plugin::ResultCache::VERSION = '0.24';
 }
 use strict;
 use warnings;
@@ -37,7 +37,7 @@ sub execute {
 
     $self->publish(
         'lexical_environment',
-        result_cache => {
+        {
             "\@$self->{result_name}" => $self->{results},
         },
     );
@@ -66,7 +66,7 @@ Reply::Plugin::ResultCache - retain previous results to be able to refer to them
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 SYNOPSIS
 

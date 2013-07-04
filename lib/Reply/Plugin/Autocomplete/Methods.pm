@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Methods::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Methods::VERSION = '0.23';
+  $Reply::Plugin::Autocomplete::Methods::VERSION = '0.24';
 }
 use strict;
 use warnings;
@@ -15,12 +15,14 @@ use MRO::Compat;
 use Package::Stash;
 use Scalar::Util 'blessed';
 
+use Reply::Util qw($ident_rx $fq_ident_rx $fq_varname_rx);
+
 
 sub new {
     my $class = shift;
 
     my $self = $class->SUPER::new(@_);
-    $self->{env} = {};
+    $self->{env} = [];
     $self->{package} = 'main';
 
     return $self;
@@ -28,9 +30,9 @@ sub new {
 
 sub lexical_environment {
     my $self = shift;
-    my ($name, $env) = @_;
+    my ($env) = @_;
 
-    $self->{env}{$name} = $env;
+    push @{ $self->{env} }, $env;
 }
 
 sub package {
@@ -44,16 +46,18 @@ sub tab_handler {
     my $self = shift;
     my ($line) = @_;
 
-    my ($invocant, $method) = $line =~ /((?:\$\s*)?[A-Z_a-z][0-9A-Z_a-z:]*)->([A-Z_a-z][0-9A-Z_a-z]*)?$/;
+    my ($invocant, $method) = $line =~ /($fq_varname_rx|$fq_ident_rx)->($ident_rx)?$/;
     return unless $invocant;
+    # XXX unicode
+    return unless $invocant =~ /^[\$A-Z_a-z]/;
 
     $method = '' unless defined $method;
 
     my $class;
     if ($invocant =~ /^\$/) {
+        # XXX should support globals here
         my $env = {
-            (map { %$_ } values %{ $self->{env} }),
-            (%{ $self->{env}{defaults} || {} }),
+            map { %$_ } @{ $self->{env} },
         };
         my $var = $env->{$invocant};
         return unless $var && ref($var) eq 'REF' && blessed($$var);
@@ -95,7 +99,7 @@ Reply::Plugin::Autocomplete::Methods - tab completion for methods
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 SYNOPSIS
 

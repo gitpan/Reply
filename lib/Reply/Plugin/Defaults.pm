@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.23';
+  $Reply::Plugin::Defaults::VERSION = '0.24';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -19,6 +19,7 @@ use warnings;
 
 use base 'Reply::Plugin';
 
+use Devel::LexAlias 'lexalias';
 use Eval::Closure;
 
 sub new {
@@ -26,7 +27,7 @@ sub new {
 
     my $self = $class->SUPER::new(@_);
     $self->{quit} = 0;
-    $self->{env} = {};
+    $self->{env} = [];
     $self->{package} = 'main';
 
     return $self;
@@ -54,26 +55,28 @@ sub compile {
     my $self = shift;
     my ($next, $line, %args) = @_;
 
-    my $default_env = delete $self->{env}{default} || {};
-    my $env = {
-        (map { %$_ } values %{ $self->{env} }),
-        %$default_env,
-    };
+    my $env = { map { %$_ } @{ $self->{env} } };
 
     my $prefix = "package $self->{package};\n$PREFIX";
 
-    return eval_closure(
+    my $code = eval_closure(
         source      => "sub {\n$prefix;\n$line\n}",
         terse_error => 1,
         environment => $env,
         %args,
     );
+
+    for my $name (keys %$env) {
+        lexalias($code, $name, $env->{$name});
+    }
+
+    return $code;
 }
 
 sub lexical_environment {
     my $self = shift;
-    my ($name, $env) = @_;
-    $self->{env}{$name} = $env;
+    my ($env) = @_;
+    push @{ $self->{env} }, $env;
 }
 
 sub package {
