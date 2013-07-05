@@ -60,6 +60,7 @@
             "Time::HiRes" : "0",
             "Try::Tiny" : "0",
             "base" : "0",
+            "overload" : "0",
             "strict" : "0",
             "warnings" : "0"
          }
@@ -85,7 +86,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.24",
+   "version" : "0.25",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"

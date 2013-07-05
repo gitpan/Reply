@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Util::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Util::VERSION = '0.24';
+  $Reply::Util::VERSION = '0.25';
 }
 use strict;
 use warnings;
@@ -32,7 +32,7 @@ Reply::Util
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 AUTHOR
 

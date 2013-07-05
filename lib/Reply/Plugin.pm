@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::VERSION = '0.24';
+  $Reply::Plugin::VERSION = '0.25';
 }
 use strict;
 use warnings;
@@ -41,7 +41,7 @@ Reply::Plugin - base class for Reply plugins
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
