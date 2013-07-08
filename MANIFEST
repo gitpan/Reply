@@ -18,6 +18,7 @@ lib/Reply/Plugin/Autocomplete/Keywords.pm
 lib/Reply/Plugin/Autocomplete/Lexicals.pm
 lib/Reply/Plugin/Autocomplete/Methods.pm
 lib/Reply/Plugin/Autocomplete/Packages.pm
+lib/Reply/Plugin/CollapseStack.pm
 lib/Reply/Plugin/Colors.pm
 lib/Reply/Plugin/DataDump.pm
 lib/Reply/Plugin/DataDumper.pm

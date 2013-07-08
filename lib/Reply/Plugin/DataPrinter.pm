@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::DataPrinter::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::DataPrinter::VERSION = '0.25';
+  $Reply::Plugin::DataPrinter::VERSION = '0.26';
 }
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use warnings;
 
 use base 'Reply::Plugin';
 
-use Data::Printer alias => 'p';
+use Data::Printer alias => 'p', colored => 1;
 
 
 sub mangle_result {
@@ -31,7 +31,7 @@ Reply::Plugin::DataPrinter - format results using Data::Printer
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 

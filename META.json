@@ -86,7 +86,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.25",
+   "version" : "0.26",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -348,6 +348,7 @@
       "Arthur Axel 'fREW' Schmidt <frioux@gmail.com>",
       "Jesse Luehrs <doy@tozt.net>",
       "Michael Reddick <michael.reddick@gmail.com>",
+      "Sawyer X <xsawyerx@cpan.org>",
       "Shawn M Moore <code@sartak.org>",
       "Stanislaw Pusep <creaktive@gmail.com>",
       "Toby Inkster <mail@tobyinkster.co.uk>"
