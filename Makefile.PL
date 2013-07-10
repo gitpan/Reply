@@ -39,7 +39,6 @@ my %WriteMakefileArgs = (
     "Time::HiRes" => 0,
     "Try::Tiny" => 0,
     "base" => 0,
-    "mro" => 0,
     "overload" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -49,7 +48,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.27",
+  "VERSION" => "0.28",
   "test" => {
     "TESTS" => "t/*.t"
   }

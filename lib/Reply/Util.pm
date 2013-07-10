@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Util::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Util::VERSION = '0.27';
+  $Reply::Util::VERSION = '0.28';
 }
 use strict;
 use warnings;
@@ -81,7 +81,7 @@ Reply::Util
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =for Pod::Coverage   methods
   all_packages

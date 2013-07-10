@@ -44,7 +44,6 @@ requires:
   Time::HiRes: 0
   Try::Tiny: 0
   base: 0
-  mro: 0
   overload: 0
   strict: 0
   warnings: 0
@@ -52,7 +51,7 @@ resources:
   bugtracker: https://github.com/doy/reply/issues
   homepage: http://metacpan.org/release/Reply
   repository: git://github.com/doy/reply.git
-version: 0.27
+version: 0.28
 x_Dist_Zilla:
   perl:
     version: 5.018000
