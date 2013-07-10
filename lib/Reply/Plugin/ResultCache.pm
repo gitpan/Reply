@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ResultCache::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ResultCache::VERSION = '0.26';
+  $Reply::Plugin::ResultCache::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -35,13 +35,6 @@ sub execute {
         push @{ $self->{results} }, \@res;
     }
 
-    $self->publish(
-        'lexical_environment',
-        {
-            "\@$self->{result_name}" => $self->{results},
-        },
-    );
-
     return @res;
 }
 
@@ -52,6 +45,11 @@ sub mangle_result {
     return unless defined $result;
     return '$' . $self->{result_name} . '[' . $#{ $self->{results} } . '] = '
          . $result;
+}
+
+sub lexical_environment {
+    my $self = shift;
+    return { "\@$self->{result_name}" => [ @{ $self->{results} } ] };
 }
 
 1;
@@ -66,7 +64,7 @@ Reply::Plugin::ResultCache - retain previous results to be able to refer to them
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -84,7 +82,7 @@ include an indication of where the value is stored, for later reference.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

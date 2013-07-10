@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Lexicals::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Lexicals::VERSION = '0.26';
+  $Reply::Plugin::Autocomplete::Lexicals::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -13,22 +13,6 @@ use base 'Reply::Plugin';
 
 use Reply::Util qw($varname_rx);
 
-
-sub new {
-    my $class = shift;
-
-    my $self = $class->SUPER::new(@_);
-    $self->{env} = [];
-
-    return $self;
-}
-
-sub lexical_environment {
-    my $self = shift;
-    my ($env) = @_;
-
-    push @{ $self->{env} }, $env;
-}
 
 sub tab_handler {
     my $self = shift;
@@ -42,7 +26,7 @@ sub tab_handler {
     # these can't be lexicals
     return if $sigil eq '&' || $sigil eq '*';
 
-    my $env = { map { %$_ } @{ $self->{env} } };
+    my $env = { map { %$_ } $self->publish('lexical_environment') };
     my @env = keys %$env;
 
     my @results;
@@ -78,7 +62,7 @@ Reply::Plugin::Autocomplete::Lexicals - tab completion for lexical variables
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -93,7 +77,7 @@ Perl code.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

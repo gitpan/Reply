@@ -1,5 +1,10 @@
 Revision history for Reply
 
+0.27  2013-07-10
+      - Add completion plugin for #-commands (#18)
+      - More completion edge case fixes
+      - More internal refactorings
+
 0.26  2013-07-08
       - Let Data::Printer handle coloring in the DataPrinter plugin. (Sawyer X)
       - Add a CollapseStack plugin, to make working with large stack traces

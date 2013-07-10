@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Packages::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Packages::VERSION = '0.26';
+  $Reply::Plugin::Packages::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -18,8 +18,6 @@ sub new {
 
     my $self = $class->SUPER::new(@_);
     $self->{package} = $opts{default_package} || 'main';
-
-    $self->publish('package', $self->{package});
 
     return $self;
 }
@@ -48,9 +46,13 @@ sub compile {
     # eval_closure's environment parameter since we need to access the
     # information in a BEGIN block
     $self->{package} = our $package;
-    $self->publish('package', $self->{package});
 
     return @result;
+}
+
+sub package {
+    my $self = shift;
+    return $self->{package};
 }
 
 1;
@@ -65,7 +67,7 @@ Reply::Plugin::Packages - persist the current package between lines
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -82,7 +84,7 @@ initial package to use when Reply starts up.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

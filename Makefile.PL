@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker 6.30;
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "read, eval, print, loop, yay!",
-  "AUTHOR" => "Jesse Luehrs <doy at cpan dot org>",
+  "AUTHOR" => "Jesse Luehrs <doy\@tozt.net>",
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
@@ -31,6 +31,7 @@ my %WriteMakefileArgs = (
     "File::Spec" => 0,
     "Getopt::Long" => "2.36",
     "Module::Runtime" => 0,
+    "Package::Stash" => 0,
     "PadWalker" => 0,
     "Scalar::Util" => 0,
     "Term::ANSIColor" => 0,
@@ -38,6 +39,7 @@ my %WriteMakefileArgs = (
     "Time::HiRes" => 0,
     "Try::Tiny" => 0,
     "base" => 0,
+    "mro" => 0,
     "overload" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -47,7 +49,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.26",
+  "VERSION" => "0.27",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -85,6 +87,13 @@ delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
 
 if ( $^O eq 'MSWin32' ) {
 	$WriteMakefileArgs{PREREQ_PM}{'Win32::Console::ANSI'} = '0';
+}
+
+if ($] < 5.010) {
+    $WriteMakefileArgs{PREREQ_PM} = {
+        %{ $WriteMakefileArgs{PREREQ_PM} },
+        "MRO::Compat" => "0",
+    };
 }
 
 WriteMakefile(%WriteMakefileArgs);

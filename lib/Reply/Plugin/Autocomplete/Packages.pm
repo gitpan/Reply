@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Packages::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Packages::VERSION = '0.26';
+  $Reply::Plugin::Autocomplete::Packages::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -13,6 +13,8 @@ use base 'Reply::Plugin';
 
 use Module::Runtime '$module_name_rx';
 
+use Reply::Util 'all_packages';
+
 
 sub tab_handler {
     my $self = shift;
@@ -21,36 +23,11 @@ sub tab_handler {
     # $module_name_rx does not permit trailing ::
     my ($before, $package_fragment) = $line =~ /(.*?)(${module_name_rx}:?:?)$/;
     return unless $package_fragment;
+    return if $before =~ /^#/; # command
     return if $before =~ /->\s*$/; # method call
     return if $before =~ /[\$\@\%\&\*]\s*$/;
 
-    my $file_fragment = $package_fragment;
-    $file_fragment =~ s{::}{/}g;
-
-    my $re = qr/^\Q$file_fragment/;
-
-    my @results;
-    for my $inc (keys %INC) {
-        if ($inc =~ $re) {
-            $inc =~ s{/}{::}g;
-            $inc =~ s{\.pm$}{};
-            push @results, $inc;
-        }
-    }
-
-    push @results,
-        grep m/^\Q$package_fragment/,
-        @{$self->{moar_packages}||=[]};
-
-    return @results;
-}
-
-# listen for events from the Packages plugin, for its wise wisdom
-# can teach us about packages that are not in %INC
-sub package {
-    my $self = shift;
-    my ($pkg) = @_;
-    push @{$self->{moar_packages}||=[]}, $pkg;
+    return sort grep { index($_, $package_fragment) == 0 } all_packages();
 }
 
 1;
@@ -65,7 +42,7 @@ Reply::Plugin::Autocomplete::Packages - tab completion for package names
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -80,7 +57,7 @@ code.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

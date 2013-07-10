@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Keywords::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Keywords::VERSION = '0.26';
+  $Reply::Plugin::Autocomplete::Keywords::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -20,6 +20,7 @@ sub tab_handler {
 
     my ($before, $last_word) = $line =~ /(.*?)(\w+)$/;
     return unless $last_word;
+    return if $before =~ /^#/; # command
     return if $before =~ /::$/; # Package::function call
     return if $before =~ /->\s*$/; # method call
     return if $before =~ /[\$\@\%\&\*]\s*$/;
@@ -41,7 +42,7 @@ Reply::Plugin::Autocomplete::Keywords - tab completion for perl keywords
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -55,7 +56,7 @@ This plugin registers a tab key handler to autocomplete keywords in Perl code.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

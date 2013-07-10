@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Methods::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Methods::VERSION = '0.26';
+  $Reply::Plugin::Autocomplete::Methods::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -11,53 +11,27 @@ use warnings;
 
 use base 'Reply::Plugin';
 
-use MRO::Compat;
-use Package::Stash;
 use Scalar::Util 'blessed';
 
-use Reply::Util qw($ident_rx $fq_ident_rx $fq_varname_rx);
+use Reply::Util qw($ident_rx $fq_ident_rx $fq_varname_rx methods);
 
-
-sub new {
-    my $class = shift;
-
-    my $self = $class->SUPER::new(@_);
-    $self->{env} = [];
-    $self->{package} = 'main';
-
-    return $self;
-}
-
-sub lexical_environment {
-    my $self = shift;
-    my ($env) = @_;
-
-    push @{ $self->{env} }, $env;
-}
-
-sub package {
-    my $self = shift;
-    my ($package) = @_;
-
-    $self->{package} = $package;
-}
 
 sub tab_handler {
     my $self = shift;
     my ($line) = @_;
 
-    my ($invocant, $method) = $line =~ /($fq_varname_rx|$fq_ident_rx)->($ident_rx)?$/;
+    my ($invocant, $method_prefix) = $line =~ /($fq_varname_rx|$fq_ident_rx)->($ident_rx)?$/;
     return unless $invocant;
     # XXX unicode
     return unless $invocant =~ /^[\$A-Z_a-z]/;
 
-    $method = '' unless defined $method;
+    $method_prefix = '' unless defined $method_prefix;
 
     my $class;
     if ($invocant =~ /^\$/) {
         # XXX should support globals here
         my $env = {
-            map { %$_ } @{ $self->{env} },
+            map { %$_ } $self->publish('lexical_environment'),
         };
         my $var = $env->{$invocant};
         return unless $var && ref($var) eq 'REF' && blessed($$var);
@@ -67,21 +41,9 @@ sub tab_handler {
         $class = $invocant;
     }
 
-    my @mro = (
-        @{ mro::get_linear_isa('UNIVERSAL') },
-        @{ mro::get_linear_isa($class) },
-    );
-
     my @results;
-    for my $package (@mro) {
-        my $stash = eval { Package::Stash->new($package) };
-        next unless $stash;
-
-        for my $stash_method ($stash->list_all_symbols('CODE')) {
-            next unless index($stash_method, $method) == 0;
-
-            push @results, $stash_method;
-        }
+    for my $method (methods($class)) {
+        push @results, $method if index($method, $method_prefix) == 0;
     }
 
     return sort @results;
@@ -99,7 +61,7 @@ Reply::Plugin::Autocomplete::Methods - tab completion for methods
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -114,7 +76,7 @@ code.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Functions::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Functions::VERSION = '0.26';
+  $Reply::Plugin::Autocomplete::Functions::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -21,6 +21,9 @@ sub tab_handler {
 
     my ($before, $fragment) = $line =~ /(.*?)(${module_name_rx}(::)?)$/;
     return unless $fragment;
+    return if $before =~ /^#/; # commands
+
+    my $current_package = ($self->publish('package'))[-1];
 
     my ($package, $func);
     if ($fragment =~ /:/) {
@@ -29,20 +32,14 @@ sub tab_handler {
         $package =~ s/:{1,2}$//;
     }
     else {
-        $package = $self->{'package'};
+        $package = $current_package;
         $func = $fragment;
     }
 
     return
-        map  { $package eq $self->{'package'} ? $_ : "$package\::$_" }
+        map  { $package eq $current_package ? $_ : "$package\::$_" }
         grep { $func ? /^\Q$func/ : 1 }
         'Package::Stash'->new($package)->list_all_symbols('CODE');
-}
-
-sub package {
-    my $self = shift;
-    my ($pkg) = @_;
-    $self->{'package'} = $pkg;
 }
 
 1;
@@ -57,7 +54,7 @@ Reply::Plugin::Autocomplete::Functions - tab completion for function names
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -72,7 +69,7 @@ code, including imported functions.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

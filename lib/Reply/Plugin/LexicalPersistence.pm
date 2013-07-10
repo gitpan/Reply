@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::LexicalPersistence::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::LexicalPersistence::VERSION = '0.26';
+  $Reply::Plugin::LexicalPersistence::VERSION = '0.27';
 }
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use warnings;
 
 use base 'Reply::Plugin';
 
-use PadWalker 'peek_sub';
+use PadWalker 'peek_sub', 'closed_over';
 
 
 sub new {
@@ -30,14 +30,21 @@ sub compile {
 
     my ($code) = $next->($line, %args);
 
+    my $new_env = peek_sub($code);
+    delete $new_env->{$_} for keys %{ closed_over($code) };
+
     $self->{env} = {
         %{ $self->{env} },
-        %{ peek_sub($code) },
+        %$new_env,
     };
 
-    $self->publish('lexical_environment', $self->{env});
-
     return $code;
+}
+
+sub lexical_environment {
+    my $self = shift;
+
+    return $self->{env};
 }
 
 1;
@@ -52,7 +59,7 @@ Reply::Plugin::LexicalPersistence - persists lexical variables between lines
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -67,7 +74,7 @@ then use C<$x> as expected in subsequent lines.
 
 =head1 AUTHOR
 
-Jesse Luehrs <doy at cpan dot org>
+Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 

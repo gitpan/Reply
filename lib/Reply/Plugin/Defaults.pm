@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.26';
+  $Reply::Plugin::Defaults::VERSION = '0.27';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -27,8 +27,6 @@ sub new {
 
     my $self = $class->SUPER::new(@_);
     $self->{quit} = 0;
-    $self->{env} = [];
-    $self->{package} = 'main';
 
     return $self;
 }
@@ -55,9 +53,10 @@ sub compile {
     my $self = shift;
     my ($next, $line, %args) = @_;
 
-    my $env = { map { %$_ } @{ $self->{env} } };
+    my $env     = { map { %$_ } $self->publish('lexical_environment') };
+    my $package = ($self->publish('package'))[-1];
 
-    my $prefix = "package $self->{package};\n$PREFIX";
+    my $prefix = "package $package;\n$PREFIX";
 
     my $code = eval_closure(
         source      => "sub {\n$prefix;\n$line\n}",
@@ -71,18 +70,6 @@ sub compile {
     }
 
     return $code;
-}
-
-sub lexical_environment {
-    my $self = shift;
-    my ($env) = @_;
-    push @{ $self->{env} }, $env;
-}
-
-sub package {
-    my $self = shift;
-    my ($package) = @_;
-    $self->{package} = $package;
 }
 
 sub execute {

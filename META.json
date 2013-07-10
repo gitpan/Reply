@@ -1,7 +1,7 @@
 {
    "abstract" : "read, eval, print, loop, yay!",
    "author" : [
-      "Jesse Luehrs <doy at cpan dot org>"
+      "Jesse Luehrs <doy@tozt.net>"
    ],
    "dynamic_config" : 1,
    "generated_by" : "Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921",
@@ -38,8 +38,6 @@
             "Class::Refresh" : "0.05",
             "Data::Dump" : "0",
             "Data::Printer" : "0",
-            "MRO::Compat" : "0",
-            "Package::Stash" : "0",
             "Proc::InvokeEditor" : "0",
             "Term::ReadLine::Gnu" : "0"
          },
@@ -53,6 +51,7 @@
             "File::Spec" : "0",
             "Getopt::Long" : "2.36",
             "Module::Runtime" : "0",
+            "Package::Stash" : "0",
             "PadWalker" : "0",
             "Scalar::Util" : "0",
             "Term::ANSIColor" : "0",
@@ -60,6 +59,7 @@
             "Time::HiRes" : "0",
             "Try::Tiny" : "0",
             "base" : "0",
+            "mro" : "0",
             "overload" : "0",
             "strict" : "0",
             "warnings" : "0"
@@ -76,8 +76,7 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "mailto" : "bug-reply@rt.cpan.org",
-         "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Reply"
+         "web" : "https://github.com/doy/reply/issues"
       },
       "homepage" : "http://metacpan.org/release/Reply",
       "repository" : {
@@ -86,7 +85,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.26",
+   "version" : "0.27",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
@@ -305,6 +304,16 @@
             "version" : "0.003"
          },
          {
+            "class" : "Dist::Zilla::Plugin::PerlVersionPrereqs",
+            "config" : {
+               "Dist::Zilla::Plugin::PerlVersionPrereqs" : {
+                  "perl_version" : "5.010"
+               }
+            },
+            "name" : "5.010",
+            "version" : "0.01"
+         },
+         {
             "class" : "Dist::Zilla::Plugin::FinderCode",
             "name" : ":InstallModules",
             "version" : "4.300034"
@@ -346,7 +355,6 @@
    "x_authority" : "cpan:DOY",
    "x_contributors" : [
       "Arthur Axel 'fREW' Schmidt <frioux@gmail.com>",
-      "Jesse Luehrs <doy@tozt.net>",
       "Michael Reddick <michael.reddick@gmail.com>",
       "Sawyer X <xsawyerx@cpan.org>",
       "Shawn M Moore <code@sartak.org>",

@@ -1,7 +1,7 @@
 ---
 abstract: 'read, eval, print, loop, yay!'
 author:
-  - 'Jesse Luehrs <doy at cpan dot org>'
+  - 'Jesse Luehrs <doy@tozt.net>'
 build_requires:
   File::Find: 0
   File::Temp: 0
@@ -24,8 +24,6 @@ recommends:
   Class::Refresh: 0.05
   Data::Dump: 0
   Data::Printer: 0
-  MRO::Compat: 0
-  Package::Stash: 0
   Proc::InvokeEditor: 0
   Term::ReadLine::Gnu: 0
 requires:
@@ -38,6 +36,7 @@ requires:
   File::Spec: 0
   Getopt::Long: 2.36
   Module::Runtime: 0
+  Package::Stash: 0
   PadWalker: 0
   Scalar::Util: 0
   Term::ANSIColor: 0
@@ -45,14 +44,15 @@ requires:
   Time::HiRes: 0
   Try::Tiny: 0
   base: 0
+  mro: 0
   overload: 0
   strict: 0
   warnings: 0
 resources:
-  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Reply
+  bugtracker: https://github.com/doy/reply/issues
   homepage: http://metacpan.org/release/Reply
   repository: git://github.com/doy/reply.git
-version: 0.26
+version: 0.27
 x_Dist_Zilla:
   perl:
     version: 5.018000
@@ -225,6 +225,13 @@ x_Dist_Zilla:
       name: MSWin32
       version: 0.003
     -
+      class: Dist::Zilla::Plugin::PerlVersionPrereqs
+      config:
+        Dist::Zilla::Plugin::PerlVersionPrereqs:
+          perl_version: 5.010
+      name: 5.010
+      version: 0.01
+    -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
       version: 4.300034
@@ -256,7 +263,6 @@ x_Dist_Zilla:
 x_authority: cpan:DOY
 x_contributors:
   - "Arthur Axel 'fREW' Schmidt <frioux@gmail.com>"
-  - 'Jesse Luehrs <doy@tozt.net>'
   - 'Michael Reddick <michael.reddick@gmail.com>'
   - 'Sawyer X <xsawyerx@cpan.org>'
   - 'Shawn M Moore <code@sartak.org>'
