@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.28';
+  $Reply::Plugin::Defaults::VERSION = '0.29';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -20,7 +20,7 @@ use warnings;
 use base 'Reply::Plugin';
 
 use Devel::LexAlias 'lexalias';
-use Eval::Closure;
+use Eval::Closure 0.09;
 
 sub new {
     my $class = shift;

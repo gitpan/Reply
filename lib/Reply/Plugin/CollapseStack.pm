@@ -3,13 +3,18 @@ BEGIN {
   $Reply::Plugin::CollapseStack::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::CollapseStack::VERSION = '0.28';
+  $Reply::Plugin::CollapseStack::VERSION = '0.29';
 }
 use strict;
 use warnings;
 # ABSTRACT: display error stack traces only on demand
 
 use base 'Reply::Plugin';
+
+{
+    local @SIG{qw(__DIE__ __WARN__)};
+    require Carp::Always;
+}
 
 
 sub new {
@@ -20,6 +25,22 @@ sub new {
     $self->{num_lines} = $opts{num_lines} || 1;
 
     return $self;
+}
+
+sub compile {
+    my $self = shift;
+    my ($next, @args) = @_;
+
+    local $SIG{__DIE__} = \&Carp::Always::_die;
+    $next->(@args);
+}
+
+sub execute {
+    my $self = shift;
+    my ($next, @args) = @_;
+
+    local $SIG{__DIE__} = \&Carp::Always::_die;
+    $next->(@args);
 }
 
 sub mangle_error {
@@ -59,7 +80,7 @@ Reply::Plugin::CollapseStack - display error stack traces only on demand
 
 =head1 VERSION
 
-version 0.28
+version 0.29
 
 =head1 SYNOPSIS
 

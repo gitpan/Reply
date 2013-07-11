@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Util::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Util::VERSION = '0.28';
+  $Reply::Util::VERSION = '0.29';
 }
 use strict;
 use warnings;
@@ -71,33 +71,13 @@ sub all_packages {
     return map { s/::$//; $_ } @packages;
 }
 
-__END__
+=begin Pod::Coverage
 
-=pod
-
-=head1 NAME
-
-Reply::Util
-
-=head1 VERSION
-
-version 0.28
-
-=for Pod::Coverage   methods
+  methods
   all_packages
 
-1;
-
-=head1 AUTHOR
-
-Jesse Luehrs <doy@tozt.net>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is Copyright (c) 2013 by Jesse Luehrs.
-
-This is free software, licensed under:
-
-  The MIT (X11) License
+=end Pod::Coverage
 
 =cut
+
+1;

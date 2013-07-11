@@ -18,6 +18,7 @@ name: Reply
 no_index:
   package:
     - Reply::Plugin::Defaults
+    - Reply::Util
 recommends:
   App::Nopaste: 0
   B::Keywords: 0
@@ -27,10 +28,11 @@ recommends:
   Proc::InvokeEditor: 0
   Term::ReadLine::Gnu: 0
 requires:
+  Carp::Always: 0
   Config::INI::Reader::Ordered: 0
   Data::Dumper: 0
   Devel::LexAlias: 0
-  Eval::Closure: 0
+  Eval::Closure: 0.09
   Exporter: 0
   File::HomeDir: 0
   File::Spec: 0
@@ -51,7 +53,7 @@ resources:
   bugtracker: https://github.com/doy/reply/issues
   homepage: http://metacpan.org/release/Reply
   repository: git://github.com/doy/reply.git
-version: 0.28
+version: 0.29
 x_Dist_Zilla:
   perl:
     version: 5.018000
