@@ -22,7 +22,6 @@ my %WriteMakefileArgs = (
   "LICENSE" => "mit",
   "NAME" => "Reply",
   "PREREQ_PM" => {
-    "Carp::Always" => 0,
     "Config::INI::Reader::Ordered" => 0,
     "Data::Dumper" => 0,
     "Devel::LexAlias" => 0,
@@ -49,7 +48,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.29",
+  "VERSION" => "0.30",
   "test" => {
     "TESTS" => "t/*.t"
   }

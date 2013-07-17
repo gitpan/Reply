@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::CollapseStack::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::CollapseStack::VERSION = '0.29';
+  $Reply::Plugin::CollapseStack::VERSION = '0.30';
 }
 use strict;
 use warnings;
@@ -80,7 +80,7 @@ Reply::Plugin::CollapseStack - display error stack traces only on demand
 
 =head1 VERSION
 
-version 0.29
+version 0.30
 
 =head1 SYNOPSIS
 
