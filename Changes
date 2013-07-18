@@ -1,5 +1,10 @@
 Revision history for Reply
 
+0.32  2013-07-18
+      - Fix test failures if Carp::Always isn't installed (djerius, #21)
+      - Clarify ReadLine documentation about the location of the history file
+        (Kosuke Asami)
+
 0.31  2013-07-18
       - fix a ReadLine bug introduced in the previous release (Kosuke Asami,
         #22)
