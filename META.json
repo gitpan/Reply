@@ -86,7 +86,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.30",
+   "version" : "0.31",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018000"
