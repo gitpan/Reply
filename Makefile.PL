@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
     "Config::INI::Reader::Ordered" => 0,
     "Data::Dumper" => 0,
     "Devel::LexAlias" => 0,
-    "Eval::Closure" => "0.09",
+    "Eval::Closure" => "0.11",
     "Exporter" => 0,
     "File::HomeDir" => 0,
     "File::Spec" => 0,
@@ -48,7 +48,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.32",
+  "VERSION" => "0.33",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -3,7 +3,7 @@ BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::VERSION = '0.32';
+  $Reply::VERSION = '0.33';
 }
 use strict;
 use warnings;
@@ -258,7 +258,7 @@ Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.32
+version 0.33
 
 =head1 SYNOPSIS
 
@@ -343,9 +343,8 @@ future to just allow specifying C<script_line> multiple times.
 
 No known bugs.
 
-Please report any bugs through RT: email
-C<bug-reply at rt.cpan.org>, or browse to
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Reply>.
+Please report any bugs to GitHub Issues at
+L<https://github.com/doy/reply/issues>.
 
 =head1 SEE ALSO
 
@@ -365,13 +364,13 @@ You can also look for information at:
 
 L<https://metacpan.org/release/Reply>
 
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Reply>
-
 =item * Github
 
 L<https://github.com/doy/reply>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Reply>
 
 =item * CPAN Ratings
 

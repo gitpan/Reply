@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Autocomplete::Functions::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Autocomplete::Functions::VERSION = '0.32';
+  $Reply::Plugin::Autocomplete::Functions::VERSION = '0.33';
 }
 use strict;
 use warnings;
@@ -54,7 +54,7 @@ Reply::Plugin::Autocomplete::Functions - tab completion for function names
 
 =head1 VERSION
 
-version 0.32
+version 0.33
 
 =head1 SYNOPSIS
 

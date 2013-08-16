@@ -32,7 +32,7 @@ requires:
   Config::INI::Reader::Ordered: 0
   Data::Dumper: 0
   Devel::LexAlias: 0
-  Eval::Closure: 0.09
+  Eval::Closure: 0.11
   Exporter: 0
   File::HomeDir: 0
   File::Spec: 0
@@ -53,10 +53,10 @@ resources:
   bugtracker: https://github.com/doy/reply/issues
   homepage: http://metacpan.org/release/Reply
   repository: git://github.com/doy/reply.git
-version: 0.32
+version: 0.33
 x_Dist_Zilla:
   perl:
-    version: 5.018000
+    version: 5.018001
   plugins:
     -
       class: Dist::Zilla::Plugin::FileFinder::Filter
@@ -215,6 +215,14 @@ x_Dist_Zilla:
       config:
         Dist::Zilla::Plugin::Prereqs:
           phase: runtime
+          type: requires
+      name: Prereqs
+      version: 4.300034
+    -
+      class: Dist::Zilla::Plugin::Prereqs
+      config:
+        Dist::Zilla::Plugin::Prereqs:
+          phase: runtime
           type: recommends
       name: RuntimeRecommends
       version: 4.300034
@@ -270,3 +278,4 @@ x_contributors:
   - 'Shawn M Moore <code@sartak.org>'
   - 'Stanislaw Pusep <creaktive@gmail.com>'
   - 'Toby Inkster <mail@tobyinkster.co.uk>'
+  - 'tokuhirom <tokuhirom@gmail.com>'

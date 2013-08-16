@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Nopaste::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Nopaste::VERSION = '0.32';
+  $Reply::Plugin::Nopaste::VERSION = '0.33';
 }
 use strict;
 use warnings;
@@ -102,7 +102,7 @@ Reply::Plugin::Nopaste - command to nopaste a transcript of the current session
 
 =head1 VERSION
 
-version 0.32
+version 0.33
 
 =head1 SYNOPSIS
 

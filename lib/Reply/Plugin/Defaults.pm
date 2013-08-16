@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.32';
+  $Reply::Plugin::Defaults::VERSION = '0.33';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -19,8 +19,7 @@ use warnings;
 
 use base 'Reply::Plugin';
 
-use Devel::LexAlias 'lexalias';
-use Eval::Closure 0.09;
+use Eval::Closure 0.11;
 
 sub new {
     my $class = shift;
@@ -61,13 +60,10 @@ sub compile {
     my $code = eval_closure(
         source      => "sub {\n$prefix;\n$line\n}",
         terse_error => 1,
+        alias       => 1,
         environment => $env,
         %args,
     );
-
-    for my $name (keys %$env) {
-        lexalias($code, $name, $env->{$name});
-    }
 
     return $code;
 }

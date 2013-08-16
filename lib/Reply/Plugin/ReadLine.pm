@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::ReadLine::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::ReadLine::VERSION = '0.32';
+  $Reply::Plugin::ReadLine::VERSION = '0.33';
 }
 use strict;
 use warnings;
@@ -33,13 +33,14 @@ sub new {
 
     $self->{rl_gnu} = $self->{term}->ReadLine eq 'Term::ReadLine::Gnu';
     $self->{rl_perl5} = $self->{term}->ReadLine eq 'Term::ReadLine::Perl5';
+    $self->{rl_caroline} = $self->{term}->ReadLine eq 'Term::ReadLine::Caroline';
 
     if ($self->{rl_perl5}) {
         # output compatible with Term::ReadLine::Gnu
         $readline::rl_scroll_nextline = 0;
     }
 
-    if ($self->{rl_perl5} || $self->{rl_gnu}) {
+    if ($self->{rl_perl5} || $self->{rl_gnu} || $self->{rl_caroline}) {
         $self->{term}->StifleHistory($opts{history_length})
             if defined $opts{history_length} && $opts{history_length} >= 0;
     }
@@ -74,7 +75,7 @@ sub DESTROY {
     return if defined $self->{history_length} && $self->{history_length} == 0;
 
     # XXX support more later
-    return unless ($self->{rl_gnu} || $self->{rl_perl5});
+    return unless ($self->{rl_gnu} || $self->{rl_perl5} || $self->{rl_caroline});
 
     $self->{term}->WriteHistory($self->{history_file})
         or warn "Couldn't write history to $self->{history_file}";
@@ -116,6 +117,20 @@ sub _register_tab_complete {
             return scalar(@matches) ? @matches : ();
         };
     }
+
+    if ($self->{rl_caroline}) {
+        $term->caroline->completion_callback(sub {
+            my ($line) = @_;
+
+            my @matches = $weakself->publish('tab_handler', $line);
+            # for variable completion, method name completion.
+            if (@matches && $line =~ /\W/) {
+                $line =~ s/[:\w]+\z//;
+                @matches = map { $line.$_ } @matches;
+            }
+            return scalar(@matches) ? @matches : ();
+        });
+    }
 }
 
 1;
@@ -130,7 +145,7 @@ Reply::Plugin::ReadLine - use Term::ReadLine for user input
 
 =head1 VERSION
 
-version 0.32
+version 0.33
 
 =head1 SYNOPSIS
 

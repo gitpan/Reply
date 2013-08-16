@@ -47,7 +47,7 @@
             "Config::INI::Reader::Ordered" : "0",
             "Data::Dumper" : "0",
             "Devel::LexAlias" : "0",
-            "Eval::Closure" : "0.09",
+            "Eval::Closure" : "0.11",
             "Exporter" : "0",
             "File::HomeDir" : "0",
             "File::Spec" : "0",
@@ -86,10 +86,10 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.32",
+   "version" : "0.33",
    "x_Dist_Zilla" : {
       "perl" : {
-         "version" : "5.018000"
+         "version" : "5.018001"
       },
       "plugins" : [
          {
@@ -288,6 +288,17 @@
             "config" : {
                "Dist::Zilla::Plugin::Prereqs" : {
                   "phase" : "runtime",
+                  "type" : "requires"
+               }
+            },
+            "name" : "Prereqs",
+            "version" : "4.300034"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Prereqs",
+            "config" : {
+               "Dist::Zilla::Plugin::Prereqs" : {
+                  "phase" : "runtime",
                   "type" : "recommends"
                }
             },
@@ -361,7 +372,8 @@
       "Sawyer X <xsawyerx@cpan.org>",
       "Shawn M Moore <code@sartak.org>",
       "Stanislaw Pusep <creaktive@gmail.com>",
-      "Toby Inkster <mail@tobyinkster.co.uk>"
+      "Toby Inkster <mail@tobyinkster.co.uk>",
+      "tokuhirom <tokuhirom@gmail.com>"
    ]
 }
 
