@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::VERSION = '0.33';
+  $Reply::Plugin::VERSION = '0.34';
 }
 use strict;
 use warnings;
@@ -50,7 +50,7 @@ Reply::Plugin - base class for Reply plugins
 
 =head1 VERSION
 
-version 0.33
+version 0.34
 
 =head1 SYNOPSIS
 
@@ -115,7 +115,7 @@ implementation returns C<< ">" >>
 
 Called to actually read a line from the user. Takes no arguments, and returns a
 single string. The default implementation uses the C<< <> >> operator to read a
-single line from the user.
+single line from C<STDIN>.
 
 =item command_C<$name> (chained)
 

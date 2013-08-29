@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Plugin::Defaults::VERSION = '0.33';
+  $Reply::Plugin::Defaults::VERSION = '0.34';
 }
 
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
@@ -37,7 +37,7 @@ sub read_line {
     my ($next, $prompt) = @_;
 
     print $prompt;
-    return scalar <>;
+    return scalar <STDIN>;
 }
 
 (my $PREFIX = <<'PREFIX') =~ s/__PACKAGE__/__PACKAGE__/ge;

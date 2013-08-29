@@ -3,7 +3,7 @@ BEGIN {
   $Reply::Util::AUTHORITY = 'cpan:DOY';
 }
 {
-  $Reply::Util::VERSION = '0.33';
+  $Reply::Util::VERSION = '0.34';
 }
 use strict;
 use warnings;
