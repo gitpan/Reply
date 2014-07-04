@@ -2,9 +2,7 @@ package Reply::Util;
 BEGIN {
   $Reply::Util::AUTHORITY = 'cpan:DOY';
 }
-{
-  $Reply::Util::VERSION = '0.34';
-}
+$Reply::Util::VERSION = '0.35';
 use strict;
 use warnings;
 

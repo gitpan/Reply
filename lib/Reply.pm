@@ -2,9 +2,7 @@ package Reply;
 BEGIN {
   $Reply::AUTHORITY = 'cpan:DOY';
 }
-{
-  $Reply::VERSION = '0.34';
-}
+$Reply::VERSION = '0.35';
 use strict;
 use warnings;
 # ABSTRACT: read, eval, print, loop, yay!
@@ -52,9 +50,15 @@ sub run {
 
 sub step {
     my $self = shift;
-    my ($line) = @_;
+    my ($line, $verbose) = @_;
 
-    $line = $self->_read unless defined $line;
+    if (defined $line) {
+        print $self->_wrapped_plugin('prompt'), $line, "\n"
+            if $verbose;
+    }
+    else {
+        $line = $self->_read;
+    }
 
     return unless defined $line;
 
@@ -252,13 +256,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Reply - read, eval, print, loop, yay!
 
 =head1 VERSION
 
-version 0.34
+version 0.35
 
 =head1 SYNOPSIS
 
@@ -300,12 +306,13 @@ Runs the repl. Will continue looping until the C<read_line> callback returns
 undef (typically when the user presses C<Ctrl+D>), or the C<loop> callback
 returns false (by default, the C<#q> command quits the repl in this way).
 
-=head2 step($line)
+=head2 step($line, $verbose)
 
 Runs a single iteration of the repl. If C<$line> is given, it will be used as
 the string to evaluate (and the C<prompt> and C<read_line> callbacks will not
-be called). Returns true if the repl can continue, and false if it was
-requested to quit.
+be called). If C<$verbose> is true, the prompt and line will be displayed as
+though they were typed. Returns true if the repl can continue, and false if it
+was requested to quit.
 
 =head1 CONFIGURATION
 
@@ -384,7 +391,7 @@ Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by Jesse Luehrs.
+This software is Copyright (c) 2014 by Jesse Luehrs.
 
 This is free software, licensed under:
 

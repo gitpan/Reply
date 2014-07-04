@@ -2,9 +2,7 @@ package Reply::Plugin::Editor;
 BEGIN {
   $Reply::Plugin::Editor::AUTHORITY = 'cpan:DOY';
 }
-{
-  $Reply::Plugin::Editor::VERSION = '0.34';
-}
+$Reply::Plugin::Editor::VERSION = '0.35';
 use strict;
 use warnings;
 # ABSTRACT: command to edit the current line in a text editor
@@ -71,13 +69,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Reply::Plugin::Editor - command to edit the current line in a text editor
 
 =head1 VERSION
 
-version 0.34
+version 0.35
 
 =head1 SYNOPSIS
 
@@ -104,7 +104,7 @@ Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by Jesse Luehrs.
+This software is Copyright (c) 2014 by Jesse Luehrs.
 
 This is free software, licensed under:
 

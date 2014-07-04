@@ -2,9 +2,7 @@ package Reply::App;
 BEGIN {
   $Reply::App::AUTHORITY = 'cpan:DOY';
 }
-{
-  $Reply::App::VERSION = '0.34';
-}
+$Reply::App::VERSION = '0.35';
 use strict;
 use warnings;
 # ABSTRACT: command line app runner for Reply
@@ -27,7 +25,7 @@ sub run {
 
     my $cfgfile = '.replyrc';
     my $exitcode;
-    my @modules;
+    my (@modules, @script_lines, @files);
     my $parsed = GetOptionsFromArray(
         \@argv,
         'cfg:s'   => \$cfgfile,
@@ -35,9 +33,17 @@ sub run {
         'b|blib'  => sub { push @INC, 'blib/lib', 'blib/arch' },
         'I:s@'    => sub { push @INC, $_[1] },
         'M:s@'    => \@modules,
+        'e:s@'    => \@script_lines,
         'version' => sub { $exitcode = 0; version() },
         'help'    => sub { $exitcode = 0; usage() },
     );
+
+    @files = @argv;
+    for my $file (@files) {
+        if (!stat $file) {
+            die "Can't read $file: $!";
+        }
+    }
 
     if (!$parsed) {
         usage(1);
@@ -69,6 +75,8 @@ sub run {
 
     my $reply = Reply->new(%args);
     $reply->step("use $_") for @modules;
+    $reply->step($_, 1) for @script_lines;
+    $reply->step('do "' . quotemeta($_) . '"', 1) for @files;
     $reply->run;
 
     return 0;
@@ -90,13 +98,15 @@ sub version {
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Reply::App - command line app runner for Reply
 
 =head1 VERSION
 
-version 0.34
+version 0.35
 
 =head1 SYNOPSIS
 
@@ -134,7 +144,7 @@ Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by Jesse Luehrs.
+This software is Copyright (c) 2014 by Jesse Luehrs.
 
 This is free software, licensed under:
 

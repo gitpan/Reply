@@ -2,10 +2,7 @@ package Reply::Plugin::Hints;
 BEGIN {
   $Reply::Plugin::Hints::AUTHORITY = 'cpan:DOY';
 }
-{
-  $Reply::Plugin::Hints::VERSION = '0.34';
-}
-
+$Reply::Plugin::Hints::VERSION = '0.35';
 my $default_hints;
 my $default_hinthash;
 my $default_warning_bits;
@@ -80,13 +77,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Reply::Plugin::Hints - persists lexical hints across input lines
 
 =head1 VERSION
 
-version 0.34
+version 0.35
 
 =head1 SYNOPSIS
 
@@ -106,7 +105,7 @@ Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by Jesse Luehrs.
+This software is Copyright (c) 2014 by Jesse Luehrs.
 
 This is free software, licensed under:
 

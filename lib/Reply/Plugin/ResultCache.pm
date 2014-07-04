@@ -2,9 +2,7 @@ package Reply::Plugin::ResultCache;
 BEGIN {
   $Reply::Plugin::ResultCache::AUTHORITY = 'cpan:DOY';
 }
-{
-  $Reply::Plugin::ResultCache::VERSION = '0.34';
-}
+$Reply::Plugin::ResultCache::VERSION = '0.35';
 use strict;
 use warnings;
 # ABSTRACT: retain previous results to be able to refer to them later
@@ -58,13 +56,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Reply::Plugin::ResultCache - retain previous results to be able to refer to them later
 
 =head1 VERSION
 
-version 0.34
+version 0.35
 
 =head1 SYNOPSIS
 
@@ -86,7 +86,7 @@ Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by Jesse Luehrs.
+This software is Copyright (c) 2014 by Jesse Luehrs.
 
 This is free software, licensed under:
 
