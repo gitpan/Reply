@@ -2,7 +2,7 @@ package Reply::Plugin::Autocomplete::Commands;
 BEGIN {
   $Reply::Plugin::Autocomplete::Commands::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::Autocomplete::Commands::VERSION = '0.35';
+$Reply::Plugin::Autocomplete::Commands::VERSION = '0.36';
 use strict;
 use warnings;
 # ABSTRACT: tab completion for reply commands
@@ -36,7 +36,7 @@ Reply::Plugin::Autocomplete::Commands - tab completion for reply commands
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 

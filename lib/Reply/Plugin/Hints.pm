@@ -2,7 +2,7 @@ package Reply::Plugin::Hints;
 BEGIN {
   $Reply::Plugin::Hints::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::Hints::VERSION = '0.35';
+$Reply::Plugin::Hints::VERSION = '0.36';
 my $default_hints;
 my $default_hinthash;
 my $default_warning_bits;
@@ -85,7 +85,7 @@ Reply::Plugin::Hints - persists lexical hints across input lines
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 

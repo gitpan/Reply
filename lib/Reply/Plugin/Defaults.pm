@@ -2,7 +2,7 @@ package Reply::Plugin::Defaults;
 BEGIN {
   $Reply::Plugin::Defaults::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::Defaults::VERSION = '0.35';
+$Reply::Plugin::Defaults::VERSION = '0.36';
 # XXX Eval::Closure imposes its own hints on things that are eval'ed at the
 # moment, but this may be fixed in the future
 BEGIN {

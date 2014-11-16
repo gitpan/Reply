@@ -2,7 +2,7 @@ package Reply::App;
 BEGIN {
   $Reply::App::AUTHORITY = 'cpan:DOY';
 }
-$Reply::App::VERSION = '0.35';
+$Reply::App::VERSION = '0.36';
 use strict;
 use warnings;
 # ABSTRACT: command line app runner for Reply
@@ -29,9 +29,9 @@ sub run {
     my $parsed = GetOptionsFromArray(
         \@argv,
         'cfg:s'   => \$cfgfile,
-        'l|lib'   => sub { push @INC, 'lib' },
-        'b|blib'  => sub { push @INC, 'blib/lib', 'blib/arch' },
-        'I:s@'    => sub { push @INC, $_[1] },
+        'l|lib'   => sub { unshift @INC, 'lib' },
+        'b|blib'  => sub { unshift @INC, 'blib/lib', 'blib/arch' },
+        'I:s@'    => sub { unshift @INC, $_[1] },
         'M:s@'    => \@modules,
         'e:s@'    => \@script_lines,
         'version' => sub { $exitcode = 0; version() },
@@ -106,7 +106,7 @@ Reply::App - command line app runner for Reply
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 

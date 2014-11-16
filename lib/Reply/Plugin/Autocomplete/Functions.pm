@@ -2,7 +2,7 @@ package Reply::Plugin::Autocomplete::Functions;
 BEGIN {
   $Reply::Plugin::Autocomplete::Functions::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::Autocomplete::Functions::VERSION = '0.35';
+$Reply::Plugin::Autocomplete::Functions::VERSION = '0.36';
 use strict;
 use warnings;
 # ABSTRACT: tab completion for function names
@@ -54,7 +54,7 @@ Reply::Plugin::Autocomplete::Functions - tab completion for function names
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,7 @@ package Reply::Plugin::Timer;
 BEGIN {
   $Reply::Plugin::Timer::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::Timer::VERSION = '0.35';
+$Reply::Plugin::Timer::VERSION = '0.36';
 use strict;
 use warnings;
 # ABSTRACT: time commands
@@ -55,7 +55,7 @@ Reply::Plugin::Timer - time commands
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,7 @@ package Reply::Plugin::DataDumper;
 BEGIN {
   $Reply::Plugin::DataDumper::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::DataDumper::VERSION = '0.35';
+$Reply::Plugin::DataDumper::VERSION = '0.36';
 use strict;
 use warnings;
 # ABSTRACT: format results using Data::Dumper
@@ -41,7 +41,7 @@ Reply::Plugin::DataDumper - format results using Data::Dumper
 
 =head1 VERSION
 
-version 0.35
+version 0.36
 
 =head1 SYNOPSIS
 
