@@ -2,7 +2,7 @@ package Reply::Plugin::CollapseStack;
 BEGIN {
   $Reply::Plugin::CollapseStack::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::CollapseStack::VERSION = '0.36';
+$Reply::Plugin::CollapseStack::VERSION = '0.37';
 use strict;
 use warnings;
 # ABSTRACT: display error stack traces only on demand
@@ -80,7 +80,7 @@ Reply::Plugin::CollapseStack - display error stack traces only on demand
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 

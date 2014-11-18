@@ -2,7 +2,7 @@ package Reply::App;
 BEGIN {
   $Reply::App::AUTHORITY = 'cpan:DOY';
 }
-$Reply::App::VERSION = '0.36';
+$Reply::App::VERSION = '0.37';
 use strict;
 use warnings;
 # ABSTRACT: command line app runner for Reply
@@ -58,17 +58,7 @@ sub run {
     my $file = $cfg->file;
     if (!-e $file) {
         print("$file not found. Generating a default...\n");
-        if (open my $fh, '>', $file) {
-            my $contents = do {
-                local $/;
-                <DATA>
-            };
-            $contents =~ s/use 5.XXX/use $]/;
-            print $fh $contents;
-            close $fh;
-        }
-        else {
-            warn "Couldn't write to $file";
+        unless ($self->generate_default_config($file)) {
             %args = ();
         }
     }
@@ -80,6 +70,29 @@ sub run {
     $reply->run;
 
     return 0;
+}
+
+
+sub generate_default_config {
+    my $self = shift;
+    my ($file) = @_;
+
+    if (open my $fh, '>', $file) {
+        my $contents = do {
+            local $/;
+            <DATA>
+        };
+        $contents =~ s/use 5.XXX/use $]/;
+        print $fh $contents;
+        close $fh;
+
+        return 1;
+    }
+    else {
+        warn "Couldn't write to $file";
+
+        return 0;
+    }
 }
 
 
@@ -106,7 +119,7 @@ Reply::App - command line app runner for Reply
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
@@ -127,6 +140,10 @@ Returns a new Reply::App instance. Takes no arguments.
 =head2 run(@argv)
 
 Parses the argument list given (typically from @ARGV), along with the user's configuration file, and attempts to start a Reply shell. A default configuration file will be generated for the user if none exists.
+
+=head2 generate_default_config($file)
+
+Generates default configuration file as per specified destination.
 
 =head2 usage($exitcode)
 

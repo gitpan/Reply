@@ -2,7 +2,7 @@ package Reply::Plugin::Colors;
 BEGIN {
   $Reply::Plugin::Colors::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::Colors::VERSION = '0.36';
+$Reply::Plugin::Colors::VERSION = '0.37';
 use strict;
 use warnings;
 # ABSTRACT: colorize output
@@ -91,7 +91,7 @@ Reply::Plugin::Colors - colorize output
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 

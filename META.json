@@ -81,115 +81,115 @@
    "provides" : {
       "Reply" : {
          "file" : "lib/Reply.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::App" : {
          "file" : "lib/Reply/App.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Config" : {
          "file" : "lib/Reply/Config.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin" : {
          "file" : "lib/Reply/Plugin.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::AutoRefresh" : {
          "file" : "lib/Reply/Plugin/AutoRefresh.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Autocomplete::Commands" : {
          "file" : "lib/Reply/Plugin/Autocomplete/Commands.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Autocomplete::Functions" : {
          "file" : "lib/Reply/Plugin/Autocomplete/Functions.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Autocomplete::Globals" : {
          "file" : "lib/Reply/Plugin/Autocomplete/Globals.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Autocomplete::Keywords" : {
          "file" : "lib/Reply/Plugin/Autocomplete/Keywords.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Autocomplete::Lexicals" : {
          "file" : "lib/Reply/Plugin/Autocomplete/Lexicals.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Autocomplete::Methods" : {
          "file" : "lib/Reply/Plugin/Autocomplete/Methods.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Autocomplete::Packages" : {
          "file" : "lib/Reply/Plugin/Autocomplete/Packages.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::CollapseStack" : {
          "file" : "lib/Reply/Plugin/CollapseStack.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Colors" : {
          "file" : "lib/Reply/Plugin/Colors.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::DataDump" : {
          "file" : "lib/Reply/Plugin/DataDump.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::DataDumper" : {
          "file" : "lib/Reply/Plugin/DataDumper.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::DataPrinter" : {
          "file" : "lib/Reply/Plugin/DataPrinter.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Editor" : {
          "file" : "lib/Reply/Plugin/Editor.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::FancyPrompt" : {
          "file" : "lib/Reply/Plugin/FancyPrompt.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Hints" : {
          "file" : "lib/Reply/Plugin/Hints.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Interrupt" : {
          "file" : "lib/Reply/Plugin/Interrupt.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::LexicalPersistence" : {
          "file" : "lib/Reply/Plugin/LexicalPersistence.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::LoadClass" : {
          "file" : "lib/Reply/Plugin/LoadClass.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Nopaste" : {
          "file" : "lib/Reply/Plugin/Nopaste.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Packages" : {
          "file" : "lib/Reply/Plugin/Packages.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::ReadLine" : {
          "file" : "lib/Reply/Plugin/ReadLine.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::ResultCache" : {
          "file" : "lib/Reply/Plugin/ResultCache.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       },
       "Reply::Plugin::Timer" : {
          "file" : "lib/Reply/Plugin/Timer.pm",
-         "version" : "0.36"
+         "version" : "0.37"
       }
    },
    "release_status" : "stable",
@@ -204,7 +204,7 @@
          "web" : "https://github.com/doy/reply"
       }
    },
-   "version" : "0.36",
+   "version" : "0.37",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.020000"
@@ -433,7 +433,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "0.36",
+                  "tag" : "0.37",
                   "tag_format" : "%v",
                   "tag_message" : "",
                   "time_zone" : "local"
@@ -698,6 +698,7 @@
       "Kosuke Asami <tfortress58@gmail.com>",
       "Michael Reddick <michael.reddick@gmail.com>",
       "Sawyer X <xsawyerx@cpan.org>",
+      "Sergey Romanov <sromanov-dev@yandex.ru>",
       "Shawn M Moore <code@sartak.org>",
       "Stanislaw Pusep <creaktive@gmail.com>",
       "Toby Inkster <mail@tobyinkster.co.uk>",

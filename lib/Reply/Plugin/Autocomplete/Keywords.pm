@@ -2,7 +2,7 @@ package Reply::Plugin::Autocomplete::Keywords;
 BEGIN {
   $Reply::Plugin::Autocomplete::Keywords::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::Autocomplete::Keywords::VERSION = '0.36';
+$Reply::Plugin::Autocomplete::Keywords::VERSION = '0.37';
 use strict;
 use warnings;
 # ABSTRACT: tab completion for perl keywords
@@ -42,7 +42,7 @@ Reply::Plugin::Autocomplete::Keywords - tab completion for perl keywords
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 

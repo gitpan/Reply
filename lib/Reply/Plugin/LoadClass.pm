@@ -2,7 +2,7 @@ package Reply::Plugin::LoadClass;
 BEGIN {
   $Reply::Plugin::LoadClass::AUTHORITY = 'cpan:DOY';
 }
-$Reply::Plugin::LoadClass::VERSION = '0.36';
+$Reply::Plugin::LoadClass::VERSION = '0.37';
 use strict;
 use warnings;
 # ABSTRACT: attempts to load classes implicitly if possible
@@ -45,7 +45,7 @@ Reply::Plugin::LoadClass - attempts to load classes implicitly if possible
 
 =head1 VERSION
 
-version 0.36
+version 0.37
 
 =head1 SYNOPSIS
 
